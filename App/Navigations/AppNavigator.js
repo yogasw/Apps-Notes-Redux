@@ -3,7 +3,7 @@ import Home from '../Screens/Home';
 import Note from '../Screens/AddNote';
 import AddNote from "../Screens/AddNote";
 import EditNote from "../Screens/EditNote";
-import SideMenu from './SideMenu';
+import SideMenu from '../Components/SideMenu';
 
 const AppNavigator = createDrawerNavigator({
     Home: {
