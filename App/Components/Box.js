@@ -21,16 +21,24 @@ class Box extends PureComponent {
                 <View style={[styles.box, {
                     backgroundColor: this.bgColor || 'orange',
                 }]}>
-                    <Text style={[styles.date, {
+                    <Text
+                        numberOfLines={1}
+                        style={[styles.date, {
                         color: this.textColor || 'white',
                     }]} right>{time}</Text>
-                    <Text style={[styles.title, {
+                    <Text
+                        numberOfLines={1}
+                        style={[styles.title, {
                         color: this.textColor || 'white',
                     }]}>{title}</Text>
-                    <Text style={[styles.category, {
+                    <Text
+                        numberOfLines={1}
+                        style={[styles.category, {
                         color: this.textColor || 'white',
                     }]}>{category}</Text>
-                    <Text style={[styles.note, {
+                    <Text
+                        numberOfLines={4}
+                        style={[styles.note, {
                         color: this.textColor || 'white',
                     }]}>{note}</Text>
                 </View>
@@ -45,39 +53,36 @@ const styles = StyleSheet.create({
         color: 'white',
         alignSelf: 'flex-end',
         marginRight: 15,
-        marginTop: 10
+        marginTop: 10,
+        width: 70
     },
     title: {
         fontSize: 17,
         fontWeight: 'bold',
         marginTop: 15,
-        marginLeft: 10
+        marginLeft: 10,
+        width: 130,
     },
     category: {
         fontSize: 12,
         fontWeight: 'bold',
-        marginLeft: 10
+        marginLeft: 10,
+        width: 130,
     },
     note: {
         marginTop: 10,
         fontSize: 13,
         paddingBottom: 20,
-        marginLeft: 10
+        marginLeft: 10,
+        width: 125,
+        textAlign: 'justify',
     },
     box: {
         height: 150,
         width: 150,
         borderRadius: 15,
         margin: 10,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 10,
-        },
-        shadowOpacity: 0.53,
-        shadowRadius: 13.97,
 
-        elevation: 21,
     },
 });
 export default Box;

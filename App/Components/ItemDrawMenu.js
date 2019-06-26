@@ -5,24 +5,23 @@ import {NavigationActions} from "react-navigation";
 
 
 class ItemDrawMenu extends PureComponent {
-
-
     render() {
-        const {icon, title, marginTop, status, isPress} = this.props;
+        const {icon, title, marginTop, isPress, routeName, activeMenu} = this.props;
+        let status = (routeName == activeMenu) ? 'active' : 'nonactive';
 
         return (
-            <TouchableOpacity onPress={() => isPress()}>
+            <TouchableOpacity onPress={() => isPress(routeName)}>
                 <View style={[styles.containerDrawCategory,
                     {
                         marginTop: marginTop || 5,
                         backgroundColor: ((status == 'active') ? 'gray' : 'white'),
-
                     }]}>
                     <Icon name={icon || 'account-circle'} size={20} style={[styles.drawIcon,
                         {color: ((status == 'active') ? 'white' : 'gray')}
                     ]}
                     />
-                    <Text style={[styles.drawCategory, {
+                    <Text
+                        style={[styles.drawCategory, {
                         color: ((status == 'active') ? 'white' : 'gray')
                     }]}>
                         {title || 'defaultTitle'}
