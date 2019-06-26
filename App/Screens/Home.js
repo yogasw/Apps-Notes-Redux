@@ -6,7 +6,7 @@ import {
 } from "native-base";
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {View, FlatList} from "react-native";
+import {View, FlatList, ScrollView} from "react-native";
 import Box from '../Components/Box';
 import EditNote from "./EditNote";
 import HeaderMenu from '../Components/HeaderMenu'
@@ -74,6 +74,137 @@ export default class HomeScreen extends React.Component {
                     note: 'Ubi est lotus verpa?Stellas ridetis!Nobilis, fortis gemnas etiam magicae de altus, peritus lanista.Bassus ratione tandem talems zeta est.Nunquam gratia valebat.Eheu.Demissio cantares, tanquam teres acipenser.Cannabiss trabem in emeritis vasa!',
                     date: 'Hercle, hilotae castus!.Cum advena cadunt, omnes elevatuses magicae fatalis, gratis aonideses.Pol.Dexter hydra superbe contactuss adelphis est.Abaculuss cadunt in cirpi!Vigils cantare, tanquam regius domina.Vigils tolerare in castus sala!Clemens danistas ducunt ad bubo.Adelphis ortums, tanquam bassus solem.'
                 },
+                {
+                    id: 9,
+                    title: 'Lapsuss mori, tanquam domesticus rumor.A falsis, deus festus fluctui.Lapsuss resistere, tanquam fatalis xiphias.Ferox vita diligenter consumeres silva est.Studere mechanice ducunt ad grandis abnoba.Racana noster exsul est.',
+                    category: 'Ubi est varius mensa?Grandis, primus barcass acceleratrix imperium de velox, mirabilis medicina.Ecce.Valebat experimentums, tanquam azureus pulchritudine.Pol, lotus resistentia!Nunquam convertam musa.Brodium de germanus classis, aperto sectam!Navis de superbus mons, anhelare sectam!',
+                    note: 'Ubi est lotus verpa?Stellas ridetis!Nobilis, fortis gemnas etiam magicae de altus, peritus lanista.Bassus ratione tandem talems zeta est.Nunquam gratia valebat.Eheu.Demissio cantares, tanquam teres acipenser.Cannabiss trabem in emeritis vasa!',
+                    date: 'Hercle, hilotae castus!.Cum advena cadunt, omnes elevatuses magicae fatalis, gratis aonideses.Pol.Dexter hydra superbe contactuss adelphis est.Abaculuss cadunt in cirpi!Vigils cantare, tanquam regius domina.Vigils tolerare in castus sala!Clemens danistas ducunt ad bubo.Adelphis ortums, tanquam bassus solem.'
+                },
+                {
+                    id: 10,
+                    title: 'Lapsuss mori, tanquam domesticus rumor.A falsis, deus festus fluctui.Lapsuss resistere, tanquam fatalis xiphias.Ferox vita diligenter consumeres silva est.Studere mechanice ducunt ad grandis abnoba.Racana noster exsul est.',
+                    category: 'Ubi est varius mensa?Grandis, primus barcass acceleratrix imperium de velox, mirabilis medicina.Ecce.Valebat experimentums, tanquam azureus pulchritudine.Pol, lotus resistentia!Nunquam convertam musa.Brodium de germanus classis, aperto sectam!Navis de superbus mons, anhelare sectam!',
+                    note: 'Ubi est lotus verpa?Stellas ridetis!Nobilis, fortis gemnas etiam magicae de altus, peritus lanista.Bassus ratione tandem talems zeta est.Nunquam gratia valebat.Eheu.Demissio cantares, tanquam teres acipenser.Cannabiss trabem in emeritis vasa!',
+                    date: 'Hercle, hilotae castus!.Cum advena cadunt, omnes elevatuses magicae fatalis, gratis aonideses.Pol.Dexter hydra superbe contactuss adelphis est.Abaculuss cadunt in cirpi!Vigils cantare, tanquam regius domina.Vigils tolerare in castus sala!Clemens danistas ducunt ad bubo.Adelphis ortums, tanquam bassus solem.'
+                },
+                {
+                    id: 11,
+                    title: 'Lapsuss mori, tanquam domesticus rumor.A falsis, deus festus fluctui.Lapsuss resistere, tanquam fatalis xiphias.Ferox vita diligenter consumeres silva est.Studere mechanice ducunt ad grandis abnoba.Racana noster exsul est.',
+                    category: 'Ubi est varius mensa?Grandis, primus barcass acceleratrix imperium de velox, mirabilis medicina.Ecce.Valebat experimentums, tanquam azureus pulchritudine.Pol, lotus resistentia!Nunquam convertam musa.Brodium de germanus classis, aperto sectam!Navis de superbus mons, anhelare sectam!',
+                    note: 'Ubi est lotus verpa?Stellas ridetis!Nobilis, fortis gemnas etiam magicae de altus, peritus lanista.Bassus ratione tandem talems zeta est.Nunquam gratia valebat.Eheu.Demissio cantares, tanquam teres acipenser.Cannabiss trabem in emeritis vasa!',
+                    date: 'Hercle, hilotae castus!.Cum advena cadunt, omnes elevatuses magicae fatalis, gratis aonideses.Pol.Dexter hydra superbe contactuss adelphis est.Abaculuss cadunt in cirpi!Vigils cantare, tanquam regius domina.Vigils tolerare in castus sala!Clemens danistas ducunt ad bubo.Adelphis ortums, tanquam bassus solem.'
+                },
+                {
+                    id: 12,
+                    title: 'Lapsuss mori, tanquam domesticus rumor.A falsis, deus festus fluctui.Lapsuss resistere, tanquam fatalis xiphias.Ferox vita diligenter consumeres silva est.Studere mechanice ducunt ad grandis abnoba.Racana noster exsul est.',
+                    category: 'Ubi est varius mensa?Grandis, primus barcass acceleratrix imperium de velox, mirabilis medicina.Ecce.Valebat experimentums, tanquam azureus pulchritudine.Pol, lotus resistentia!Nunquam convertam musa.Brodium de germanus classis, aperto sectam!Navis de superbus mons, anhelare sectam!',
+                    note: 'Ubi est lotus verpa?Stellas ridetis!Nobilis, fortis gemnas etiam magicae de altus, peritus lanista.Bassus ratione tandem talems zeta est.Nunquam gratia valebat.Eheu.Demissio cantares, tanquam teres acipenser.Cannabiss trabem in emeritis vasa!',
+                    date: 'Hercle, hilotae castus!.Cum advena cadunt, omnes elevatuses magicae fatalis, gratis aonideses.Pol.Dexter hydra superbe contactuss adelphis est.Abaculuss cadunt in cirpi!Vigils cantare, tanquam regius domina.Vigils tolerare in castus sala!Clemens danistas ducunt ad bubo.Adelphis ortums, tanquam bassus solem.'
+                },
+                {
+                    id: 13,
+                    title: 'Lapsuss mori, tanquam domesticus rumor.A falsis, deus festus fluctui.Lapsuss resistere, tanquam fatalis xiphias.Ferox vita diligenter consumeres silva est.Studere mechanice ducunt ad grandis abnoba.Racana noster exsul est.',
+                    category: 'Ubi est varius mensa?Grandis, primus barcass acceleratrix imperium de velox, mirabilis medicina.Ecce.Valebat experimentums, tanquam azureus pulchritudine.Pol, lotus resistentia!Nunquam convertam musa.Brodium de germanus classis, aperto sectam!Navis de superbus mons, anhelare sectam!',
+                    note: 'Ubi est lotus verpa?Stellas ridetis!Nobilis, fortis gemnas etiam magicae de altus, peritus lanista.Bassus ratione tandem talems zeta est.Nunquam gratia valebat.Eheu.Demissio cantares, tanquam teres acipenser.Cannabiss trabem in emeritis vasa!',
+                    date: 'Hercle, hilotae castus!.Cum advena cadunt, omnes elevatuses magicae fatalis, gratis aonideses.Pol.Dexter hydra superbe contactuss adelphis est.Abaculuss cadunt in cirpi!Vigils cantare, tanquam regius domina.Vigils tolerare in castus sala!Clemens danistas ducunt ad bubo.Adelphis ortums, tanquam bassus solem.'
+                },
+                {
+                    id: 14,
+                    title: 'Lapsuss mori, tanquam domesticus rumor.A falsis, deus festus fluctui.Lapsuss resistere, tanquam fatalis xiphias.Ferox vita diligenter consumeres silva est.Studere mechanice ducunt ad grandis abnoba.Racana noster exsul est.',
+                    category: 'Ubi est varius mensa?Grandis, primus barcass acceleratrix imperium de velox, mirabilis medicina.Ecce.Valebat experimentums, tanquam azureus pulchritudine.Pol, lotus resistentia!Nunquam convertam musa.Brodium de germanus classis, aperto sectam!Navis de superbus mons, anhelare sectam!',
+                    note: 'Ubi est lotus verpa?Stellas ridetis!Nobilis, fortis gemnas etiam magicae de altus, peritus lanista.Bassus ratione tandem talems zeta est.Nunquam gratia valebat.Eheu.Demissio cantares, tanquam teres acipenser.Cannabiss trabem in emeritis vasa!',
+                    date: 'Hercle, hilotae castus!.Cum advena cadunt, omnes elevatuses magicae fatalis, gratis aonideses.Pol.Dexter hydra superbe contactuss adelphis est.Abaculuss cadunt in cirpi!Vigils cantare, tanquam regius domina.Vigils tolerare in castus sala!Clemens danistas ducunt ad bubo.Adelphis ortums, tanquam bassus solem.'
+                }, {
+                    id: 15,
+                    title: 'Lapsuss mori, tanquam domesticus rumor.A falsis, deus festus fluctui.Lapsuss resistere, tanquam fatalis xiphias.Ferox vita diligenter consumeres silva est.Studere mechanice ducunt ad grandis abnoba.Racana noster exsul est.',
+                    category: 'Ubi est varius mensa?Grandis, primus barcass acceleratrix imperium de velox, mirabilis medicina.Ecce.Valebat experimentums, tanquam azureus pulchritudine.Pol, lotus resistentia!Nunquam convertam musa.Brodium de germanus classis, aperto sectam!Navis de superbus mons, anhelare sectam!',
+                    note: 'Ubi est lotus verpa?Stellas ridetis!Nobilis, fortis gemnas etiam magicae de altus, peritus lanista.Bassus ratione tandem talems zeta est.Nunquam gratia valebat.Eheu.Demissio cantares, tanquam teres acipenser.Cannabiss trabem in emeritis vasa!',
+                    date: 'Hercle, hilotae castus!.Cum advena cadunt, omnes elevatuses magicae fatalis, gratis aonideses.Pol.Dexter hydra superbe contactuss adelphis est.Abaculuss cadunt in cirpi!Vigils cantare, tanquam regius domina.Vigils tolerare in castus sala!Clemens danistas ducunt ad bubo.Adelphis ortums, tanquam bassus solem.'
+                }, {
+                    id: 16,
+                    title: 'Lapsuss mori, tanquam domesticus rumor.A falsis, deus festus fluctui.Lapsuss resistere, tanquam fatalis xiphias.Ferox vita diligenter consumeres silva est.Studere mechanice ducunt ad grandis abnoba.Racana noster exsul est.',
+                    category: 'Ubi est varius mensa?Grandis, primus barcass acceleratrix imperium de velox, mirabilis medicina.Ecce.Valebat experimentums, tanquam azureus pulchritudine.Pol, lotus resistentia!Nunquam convertam musa.Brodium de germanus classis, aperto sectam!Navis de superbus mons, anhelare sectam!',
+                    note: 'Ubi est lotus verpa?Stellas ridetis!Nobilis, fortis gemnas etiam magicae de altus, peritus lanista.Bassus ratione tandem talems zeta est.Nunquam gratia valebat.Eheu.Demissio cantares, tanquam teres acipenser.Cannabiss trabem in emeritis vasa!',
+                    date: 'Hercle, hilotae castus!.Cum advena cadunt, omnes elevatuses magicae fatalis, gratis aonideses.Pol.Dexter hydra superbe contactuss adelphis est.Abaculuss cadunt in cirpi!Vigils cantare, tanquam regius domina.Vigils tolerare in castus sala!Clemens danistas ducunt ad bubo.Adelphis ortums, tanquam bassus solem.'
+                }, {
+                    id: 17,
+                    title: 'Lapsuss mori, tanquam domesticus rumor.A falsis, deus festus fluctui.Lapsuss resistere, tanquam fatalis xiphias.Ferox vita diligenter consumeres silva est.Studere mechanice ducunt ad grandis abnoba.Racana noster exsul est.',
+                    category: 'Ubi est varius mensa?Grandis, primus barcass acceleratrix imperium de velox, mirabilis medicina.Ecce.Valebat experimentums, tanquam azureus pulchritudine.Pol, lotus resistentia!Nunquam convertam musa.Brodium de germanus classis, aperto sectam!Navis de superbus mons, anhelare sectam!',
+                    note: 'Ubi est lotus verpa?Stellas ridetis!Nobilis, fortis gemnas etiam magicae de altus, peritus lanista.Bassus ratione tandem talems zeta est.Nunquam gratia valebat.Eheu.Demissio cantares, tanquam teres acipenser.Cannabiss trabem in emeritis vasa!',
+                    date: 'Hercle, hilotae castus!.Cum advena cadunt, omnes elevatuses magicae fatalis, gratis aonideses.Pol.Dexter hydra superbe contactuss adelphis est.Abaculuss cadunt in cirpi!Vigils cantare, tanquam regius domina.Vigils tolerare in castus sala!Clemens danistas ducunt ad bubo.Adelphis ortums, tanquam bassus solem.'
+                }, {
+                    id: 18,
+                    title: 'Lapsuss mori, tanquam domesticus rumor.A falsis, deus festus fluctui.Lapsuss resistere, tanquam fatalis xiphias.Ferox vita diligenter consumeres silva est.Studere mechanice ducunt ad grandis abnoba.Racana noster exsul est.',
+                    category: 'Ubi est varius mensa?Grandis, primus barcass acceleratrix imperium de velox, mirabilis medicina.Ecce.Valebat experimentums, tanquam azureus pulchritudine.Pol, lotus resistentia!Nunquam convertam musa.Brodium de germanus classis, aperto sectam!Navis de superbus mons, anhelare sectam!',
+                    note: 'Ubi est lotus verpa?Stellas ridetis!Nobilis, fortis gemnas etiam magicae de altus, peritus lanista.Bassus ratione tandem talems zeta est.Nunquam gratia valebat.Eheu.Demissio cantares, tanquam teres acipenser.Cannabiss trabem in emeritis vasa!',
+                    date: 'Hercle, hilotae castus!.Cum advena cadunt, omnes elevatuses magicae fatalis, gratis aonideses.Pol.Dexter hydra superbe contactuss adelphis est.Abaculuss cadunt in cirpi!Vigils cantare, tanquam regius domina.Vigils tolerare in castus sala!Clemens danistas ducunt ad bubo.Adelphis ortums, tanquam bassus solem.'
+                }, {
+                    id: 19,
+                    title: 'Lapsuss mori, tanquam domesticus rumor.A falsis, deus festus fluctui.Lapsuss resistere, tanquam fatalis xiphias.Ferox vita diligenter consumeres silva est.Studere mechanice ducunt ad grandis abnoba.Racana noster exsul est.',
+                    category: 'Ubi est varius mensa?Grandis, primus barcass acceleratrix imperium de velox, mirabilis medicina.Ecce.Valebat experimentums, tanquam azureus pulchritudine.Pol, lotus resistentia!Nunquam convertam musa.Brodium de germanus classis, aperto sectam!Navis de superbus mons, anhelare sectam!',
+                    note: 'Ubi est lotus verpa?Stellas ridetis!Nobilis, fortis gemnas etiam magicae de altus, peritus lanista.Bassus ratione tandem talems zeta est.Nunquam gratia valebat.Eheu.Demissio cantares, tanquam teres acipenser.Cannabiss trabem in emeritis vasa!',
+                    date: 'Hercle, hilotae castus!.Cum advena cadunt, omnes elevatuses magicae fatalis, gratis aonideses.Pol.Dexter hydra superbe contactuss adelphis est.Abaculuss cadunt in cirpi!Vigils cantare, tanquam regius domina.Vigils tolerare in castus sala!Clemens danistas ducunt ad bubo.Adelphis ortums, tanquam bassus solem.'
+                },
+                {
+                    id: 20,
+                    title: 'Lapsuss mori, tanquam domesticus rumor.A falsis, deus festus fluctui.Lapsuss resistere, tanquam fatalis xiphias.Ferox vita diligenter consumeres silva est.Studere mechanice ducunt ad grandis abnoba.Racana noster exsul est.',
+                    category: 'Ubi est varius mensa?Grandis, primus barcass acceleratrix imperium de velox, mirabilis medicina.Ecce.Valebat experimentums, tanquam azureus pulchritudine.Pol, lotus resistentia!Nunquam convertam musa.Brodium de germanus classis, aperto sectam!Navis de superbus mons, anhelare sectam!',
+                    note: 'Ubi est lotus verpa?Stellas ridetis!Nobilis, fortis gemnas etiam magicae de altus, peritus lanista.Bassus ratione tandem talems zeta est.Nunquam gratia valebat.Eheu.Demissio cantares, tanquam teres acipenser.Cannabiss trabem in emeritis vasa!',
+                    date: 'Hercle, hilotae castus!.Cum advena cadunt, omnes elevatuses magicae fatalis, gratis aonideses.Pol.Dexter hydra superbe contactuss adelphis est.Abaculuss cadunt in cirpi!Vigils cantare, tanquam regius domina.Vigils tolerare in castus sala!Clemens danistas ducunt ad bubo.Adelphis ortums, tanquam bassus solem.'
+                }, {
+                    id: 21,
+                    title: 'Lapsuss mori, tanquam domesticus rumor.A falsis, deus festus fluctui.Lapsuss resistere, tanquam fatalis xiphias.Ferox vita diligenter consumeres silva est.Studere mechanice ducunt ad grandis abnoba.Racana noster exsul est.',
+                    category: 'Ubi est varius mensa?Grandis, primus barcass acceleratrix imperium de velox, mirabilis medicina.Ecce.Valebat experimentums, tanquam azureus pulchritudine.Pol, lotus resistentia!Nunquam convertam musa.Brodium de germanus classis, aperto sectam!Navis de superbus mons, anhelare sectam!',
+                    note: 'Ubi est lotus verpa?Stellas ridetis!Nobilis, fortis gemnas etiam magicae de altus, peritus lanista.Bassus ratione tandem talems zeta est.Nunquam gratia valebat.Eheu.Demissio cantares, tanquam teres acipenser.Cannabiss trabem in emeritis vasa!',
+                    date: 'Hercle, hilotae castus!.Cum advena cadunt, omnes elevatuses magicae fatalis, gratis aonideses.Pol.Dexter hydra superbe contactuss adelphis est.Abaculuss cadunt in cirpi!Vigils cantare, tanquam regius domina.Vigils tolerare in castus sala!Clemens danistas ducunt ad bubo.Adelphis ortums, tanquam bassus solem.'
+                },
+                {
+                    id: 22,
+                    title: 'Lapsuss mori, tanquam domesticus rumor.A falsis, deus festus fluctui.Lapsuss resistere, tanquam fatalis xiphias.Ferox vita diligenter consumeres silva est.Studere mechanice ducunt ad grandis abnoba.Racana noster exsul est.',
+                    category: 'Ubi est varius mensa?Grandis, primus barcass acceleratrix imperium de velox, mirabilis medicina.Ecce.Valebat experimentums, tanquam azureus pulchritudine.Pol, lotus resistentia!Nunquam convertam musa.Brodium de germanus classis, aperto sectam!Navis de superbus mons, anhelare sectam!',
+                    note: 'Ubi est lotus verpa?Stellas ridetis!Nobilis, fortis gemnas etiam magicae de altus, peritus lanista.Bassus ratione tandem talems zeta est.Nunquam gratia valebat.Eheu.Demissio cantares, tanquam teres acipenser.Cannabiss trabem in emeritis vasa!',
+                    date: 'Hercle, hilotae castus!.Cum advena cadunt, omnes elevatuses magicae fatalis, gratis aonideses.Pol.Dexter hydra superbe contactuss adelphis est.Abaculuss cadunt in cirpi!Vigils cantare, tanquam regius domina.Vigils tolerare in castus sala!Clemens danistas ducunt ad bubo.Adelphis ortums, tanquam bassus solem.'
+                }, {
+                    id: 23,
+                    title: 'Lapsuss mori, tanquam domesticus rumor.A falsis, deus festus fluctui.Lapsuss resistere, tanquam fatalis xiphias.Ferox vita diligenter consumeres silva est.Studere mechanice ducunt ad grandis abnoba.Racana noster exsul est.',
+                    category: 'Ubi est varius mensa?Grandis, primus barcass acceleratrix imperium de velox, mirabilis medicina.Ecce.Valebat experimentums, tanquam azureus pulchritudine.Pol, lotus resistentia!Nunquam convertam musa.Brodium de germanus classis, aperto sectam!Navis de superbus mons, anhelare sectam!',
+                    note: 'Ubi est lotus verpa?Stellas ridetis!Nobilis, fortis gemnas etiam magicae de altus, peritus lanista.Bassus ratione tandem talems zeta est.Nunquam gratia valebat.Eheu.Demissio cantares, tanquam teres acipenser.Cannabiss trabem in emeritis vasa!',
+                    date: 'Hercle, hilotae castus!.Cum advena cadunt, omnes elevatuses magicae fatalis, gratis aonideses.Pol.Dexter hydra superbe contactuss adelphis est.Abaculuss cadunt in cirpi!Vigils cantare, tanquam regius domina.Vigils tolerare in castus sala!Clemens danistas ducunt ad bubo.Adelphis ortums, tanquam bassus solem.'
+                }, {
+                    id: 24,
+                    title: 'Lapsuss mori, tanquam domesticus rumor.A falsis, deus festus fluctui.Lapsuss resistere, tanquam fatalis xiphias.Ferox vita diligenter consumeres silva est.Studere mechanice ducunt ad grandis abnoba.Racana noster exsul est.',
+                    category: 'Ubi est varius mensa?Grandis, primus barcass acceleratrix imperium de velox, mirabilis medicina.Ecce.Valebat experimentums, tanquam azureus pulchritudine.Pol, lotus resistentia!Nunquam convertam musa.Brodium de germanus classis, aperto sectam!Navis de superbus mons, anhelare sectam!',
+                    note: 'Ubi est lotus verpa?Stellas ridetis!Nobilis, fortis gemnas etiam magicae de altus, peritus lanista.Bassus ratione tandem talems zeta est.Nunquam gratia valebat.Eheu.Demissio cantares, tanquam teres acipenser.Cannabiss trabem in emeritis vasa!',
+                    date: 'Hercle, hilotae castus!.Cum advena cadunt, omnes elevatuses magicae fatalis, gratis aonideses.Pol.Dexter hydra superbe contactuss adelphis est.Abaculuss cadunt in cirpi!Vigils cantare, tanquam regius domina.Vigils tolerare in castus sala!Clemens danistas ducunt ad bubo.Adelphis ortums, tanquam bassus solem.'
+                },
+                {
+                    id: 25,
+                    title: 'Lapsuss mori, tanquam domesticus rumor.A falsis, deus festus fluctui.Lapsuss resistere, tanquam fatalis xiphias.Ferox vita diligenter consumeres silva est.Studere mechanice ducunt ad grandis abnoba.Racana noster exsul est.',
+                    category: 'Ubi est varius mensa?Grandis, primus barcass acceleratrix imperium de velox, mirabilis medicina.Ecce.Valebat experimentums, tanquam azureus pulchritudine.Pol, lotus resistentia!Nunquam convertam musa.Brodium de germanus classis, aperto sectam!Navis de superbus mons, anhelare sectam!',
+                    note: 'Ubi est lotus verpa?Stellas ridetis!Nobilis, fortis gemnas etiam magicae de altus, peritus lanista.Bassus ratione tandem talems zeta est.Nunquam gratia valebat.Eheu.Demissio cantares, tanquam teres acipenser.Cannabiss trabem in emeritis vasa!',
+                    date: 'Hercle, hilotae castus!.Cum advena cadunt, omnes elevatuses magicae fatalis, gratis aonideses.Pol.Dexter hydra superbe contactuss adelphis est.Abaculuss cadunt in cirpi!Vigils cantare, tanquam regius domina.Vigils tolerare in castus sala!Clemens danistas ducunt ad bubo.Adelphis ortums, tanquam bassus solem.'
+                },
+                {
+                    id: 26,
+                    title: 'Lapsuss mori, tanquam domesticus rumor.A falsis, deus festus fluctui.Lapsuss resistere, tanquam fatalis xiphias.Ferox vita diligenter consumeres silva est.Studere mechanice ducunt ad grandis abnoba.Racana noster exsul est.',
+                    category: 'Ubi est varius mensa?Grandis, primus barcass acceleratrix imperium de velox, mirabilis medicina.Ecce.Valebat experimentums, tanquam azureus pulchritudine.Pol, lotus resistentia!Nunquam convertam musa.Brodium de germanus classis, aperto sectam!Navis de superbus mons, anhelare sectam!',
+                    note: 'Ubi est lotus verpa?Stellas ridetis!Nobilis, fortis gemnas etiam magicae de altus, peritus lanista.Bassus ratione tandem talems zeta est.Nunquam gratia valebat.Eheu.Demissio cantares, tanquam teres acipenser.Cannabiss trabem in emeritis vasa!',
+                    date: 'Hercle, hilotae castus!.Cum advena cadunt, omnes elevatuses magicae fatalis, gratis aonideses.Pol.Dexter hydra superbe contactuss adelphis est.Abaculuss cadunt in cirpi!Vigils cantare, tanquam regius domina.Vigils tolerare in castus sala!Clemens danistas ducunt ad bubo.Adelphis ortums, tanquam bassus solem.'
+                },
+                {
+                    id: 27,
+                    title: 'Lapsuss mori, tanquam domesticus rumor.A falsis, deus festus fluctui.Lapsuss resistere, tanquam fatalis xiphias.Ferox vita diligenter consumeres silva est.Studere mechanice ducunt ad grandis abnoba.Racana noster exsul est.',
+                    category: 'Ubi est varius mensa?Grandis, primus barcass acceleratrix imperium de velox, mirabilis medicina.Ecce.Valebat experimentums, tanquam azureus pulchritudine.Pol, lotus resistentia!Nunquam convertam musa.Brodium de germanus classis, aperto sectam!Navis de superbus mons, anhelare sectam!',
+                    note: 'Ubi est lotus verpa?Stellas ridetis!Nobilis, fortis gemnas etiam magicae de altus, peritus lanista.Bassus ratione tandem talems zeta est.Nunquam gratia valebat.Eheu.Demissio cantares, tanquam teres acipenser.Cannabiss trabem in emeritis vasa!',
+                    date: 'Hercle, hilotae castus!.Cum advena cadunt, omnes elevatuses magicae fatalis, gratis aonideses.Pol.Dexter hydra superbe contactuss adelphis est.Abaculuss cadunt in cirpi!Vigils cantare, tanquam regius domina.Vigils tolerare in castus sala!Clemens danistas ducunt ad bubo.Adelphis ortums, tanquam bassus solem.'
+                }, {
+                    id: 28,
+                    title: 'Lapsuss mori, tanquam domesticus rumor.A falsis, deus festus fluctui.Lapsuss resistere, tanquam fatalis xiphias.Ferox vita diligenter consumeres silva est.Studere mechanice ducunt ad grandis abnoba.Racana noster exsul est.',
+                    category: 'Ubi est varius mensa?Grandis, primus barcass acceleratrix imperium de velox, mirabilis medicina.Ecce.Valebat experimentums, tanquam azureus pulchritudine.Pol, lotus resistentia!Nunquam convertam musa.Brodium de germanus classis, aperto sectam!Navis de superbus mons, anhelare sectam!',
+                    note: 'Ubi est lotus verpa?Stellas ridetis!Nobilis, fortis gemnas etiam magicae de altus, peritus lanista.Bassus ratione tandem talems zeta est.Nunquam gratia valebat.Eheu.Demissio cantares, tanquam teres acipenser.Cannabiss trabem in emeritis vasa!',
+                    date: 'Hercle, hilotae castus!.Cum advena cadunt, omnes elevatuses magicae fatalis, gratis aonideses.Pol.Dexter hydra superbe contactuss adelphis est.Abaculuss cadunt in cirpi!Vigils cantare, tanquam regius domina.Vigils tolerare in castus sala!Clemens danistas ducunt ad bubo.Adelphis ortums, tanquam bassus solem.'
+                },
             ]
         }
     }
@@ -90,9 +221,11 @@ export default class HomeScreen extends React.Component {
                 <Item rounded style={styles.search}>
                     <Input placeholder='Search...'/>
                 </Item>
-                <Content padder>
+                <ScrollView>
+                    <Content>
                     <View style={styles.content}>
                         <FlatList
+                            style={styles.flatList}
                             data={this.state.dummyData}
                             numColumns={2}
                             keyExtractor={(item, index) => item.id.toString()}
@@ -109,7 +242,8 @@ export default class HomeScreen extends React.Component {
                             }
                         />
                     </View>
-                </Content>
+                    </Content>
+                </ScrollView>
                 <Fab
                     active={this.state.active}
                     direction="up"
@@ -139,6 +273,7 @@ const styles = {
     content: {
         flexDirection: 'row',
         flexWrap: 'wrap',
+        marginLeft: 10
     },
     headerText: {
         fontSize: 20,
@@ -151,6 +286,9 @@ const styles = {
         padding: 2,
         fontSize: 20
     },
+    flatList: {
+        marginTop: 90,
+    }
 };
 
 
