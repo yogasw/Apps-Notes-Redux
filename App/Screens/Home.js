@@ -4,144 +4,86 @@ import {
     Button, Title, Item, Card, CardItem,
     Content, Input, Text, Fab,
 } from "native-base";
+
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {View, ScrollView} from "react-native";
+import {View, TouchableOpacity} from "react-native";
+import Menu, {MenuItem} from 'react-native-material-menu';
+import Box from '../Components/Box';
+import EditNote from "./EditNote";
 
 export default class HomeScreen extends React.Component {
+    _menu = null;
+
     constructor(props) {
         super(props);
         this.state = {
             active: 'true'
         };
+        const navigate = this.props.navigate;
     }
 
+    setMenuRef = ref => {
+        this._menu = ref;
+    };
+
+    hideMenu = () => {
+        this._menu.hide();
+    };
+
+    showMenu = () => {
+        this._menu.show();
+    };
+
     render() {
+        const {navigate} = this.props.navigation;
         return (
             <Container>
-                    <Header style={{backgroundColor: '#ffffff' }}>
-                        <Left>
-                            <Button
-                                transparent
-                                onPress={() => this.props.navigation.navigate("DrawerOpen")}>
-                                <Icon color="black" size={25} name="menu"/>
-                            </Button>
-                        </Left>
-                        <Body>
-                            <Title>Note App</Title>
-                        </Body>
-                        <Right>
-                            <Button
-                                transparent
-                                onPress={() => this.props.navigation.navigate("DrawerOpen")}>
-                                <Icon name="sort-descending" color="black" size={25}/>
-                            </Button>
-                        </Right>
-                    </Header>
-                    <Item rounded style={styles.search}>
-                        <Input placeholder='Search...'/>
-                    </Item>
-                    <Content padder>
-                        <View style={styles.content}>
-                            <Card>
-                                <CardItem style={styles.cardItem}>
-                                    <Body>
-                                        <Text style={styles.date} right>20 Juni 2019</Text>
-                                        <Text style={styles.title}>Title</Text>
-                                        <Text style={styles.category}>Category</Text>
-                                        <Text style={styles.note}>Cur lactea moriGemnas congregabo!?</Text>
-                                    </Body>
-                                </CardItem>
-                            </Card>
-                            <Card>
-                                <CardItem style={styles.cardItem}>
-                                    <Body>
-                                        <Text style={styles.date} right>20 Juni 2019</Text>
-                                        <Text style={styles.title}>Title</Text>
-                                        <Text style={styles.category}>Category</Text>
-                                        <Text style={styles.note}>Danistas sunt competitio</Text>
-                                    </Body>
-                                </CardItem>
-                            </Card>
-                            <Card>
-                                <CardItem style={styles.cardItem}>
-                                    <Body>
-                                        <Text style={styles.date} right>20 Juni 2019</Text>
-                                        <Text style={styles.title}>Title</Text>
-                                        <Text style={styles.category}>Category</Text>
-                                        <Text style={styles.note}>Danistas sunt competitio</Text>
-                                    </Body>
-                                </CardItem>
-                            </Card>
-                            <Card>
-                                <CardItem style={styles.cardItem}>
-                                    <Body>
-                                        <Text style={styles.date} right>20 Juni 2019</Text>
-                                        <Text style={styles.title}>Title</Text>
-                                        <Text style={styles.category}>Category</Text>
-                                        <Text style={styles.note}>Danistas sunt competitio</Text>
-                                    </Body>
-                                </CardItem>
-                            </Card>
-                            <Card>
-                                <CardItem style={styles.cardItem}>
-                                    <Body>
-                                        <Text style={styles.date} right>20 Juni 2019</Text>
-                                        <Text style={styles.title}>Title</Text>
-                                        <Text style={styles.category}>Category</Text>
-                                        <Text style={styles.note}>Danistas sunt competitio</Text>
-                                    </Body>
-                                </CardItem>
-                            </Card>
-                            <Card>
-                                <CardItem style={styles.cardItem}>
-                                    <Body>
-                                        <Text style={styles.date} right>20 Juni 2019</Text>
-                                        <Text style={styles.title}>Title</Text>
-                                        <Text style={styles.category}>Category</Text>
-                                        <Text style={styles.note}>Danistas sunt competitio</Text>
-                                    </Body>
-                                </CardItem>
-                            </Card>
-                            <Card>
-                                <CardItem style={styles.cardItem}>
-                                    <Body>
-                                        <Text style={styles.date} right>20 Juni 2019</Text>
-                                        <Text style={styles.title}>Title</Text>
-                                        <Text style={styles.category}>Category</Text>
-                                        <Text style={styles.note}>Danistas sunt competitio</Text>
-                                    </Body>
-                                </CardItem>
-                            </Card>
-                            <Card>
-                                <CardItem style={styles.cardItem}>
-                                    <Body>
-                                        <Text style={styles.date} right>20 Juni 2019</Text>
-                                        <Text style={styles.title}>Title</Text>
-                                        <Text style={styles.category}>Category</Text>
-                                        <Text style={styles.note}>Danistas sunt competitio</Text>
-                                    </Body>
-                                </CardItem>
-                            </Card>
-                            <Card>
-                                <CardItem style={styles.cardItem}>
-                                    <Body>
-                                        <Text style={styles.date} right>20 Juni 2019</Text>
-                                        <Text style={styles.title}>Title</Text>
-                                        <Text style={styles.category}>Category</Text>
-                                        <Text style={styles.note}>Danistas sunt competitio</Text>
-                                    </Body>
-                                </CardItem>
-                            </Card>
-                        </View>
-                    </Content>
+                <Header style={{backgroundColor: '#ffffff'}}>
+                    <Left>
+                        <TouchableOpacity
+                            transparent
+                            onPress={() => this.props.navigation.openDrawer()}>
+                            <Icon color="black" size={25} name="menu"/>
+                        </TouchableOpacity>
+                    </Left>
+                    <Body>
+                        <Title style={{color: 'black'}}>Note App</Title>
+                    </Body>
+                    <Right>
+                        <Menu
+                            ref={this.setMenuRef}
+                            button={<Icon color="black" size={25} onPress={this.showMenu} name="sort-descending"/>}
+                        >
+                            <MenuItem onPress={this.hideMenu}>Asc</MenuItem>
+                            <MenuItem onPress={this.hideMenu}>Desc</MenuItem>
+                        </Menu>
+                    </Right>
+                </Header>
+                <Item rounded style={styles.search}>
+                    <Input placeholder='Search...'/>
+                </Item>
+                <Content padder>
+                    <View style={styles.content}>
+                        <Box time="2019" title="Judul" category="Kategori 1" note="Hari ini makan 1" color="white"
+                             onPress={() => navigate('EditNote')}/>
+                        <Box time="2019" title="Judul" category="Kategori 2" note="Hari ini makan 1" color="white"
+                             onPress={() => navigate('EditNote')}/>
+                        <Box time="2019" title="Judul" category="Kategori 3" note="Hari ini makan 1" color="white"
+                             onPress={() => navigate('EditNote')}/>
+                        <Box time="2019" title="Judul" category="Kategori 4" note="Hari ini makan 1" color="white"
+                             onPress={() => navigate('EditNote')}/>
+                        <Box time="2019" title="Judul" category="Kategori 5" note="Hari ini makan 1" color="white"
+                             onPress={() => navigate('EditNote')}/>
+                    </View>
+                </Content>
                 <Fab
                     active={this.state.active}
                     direction="up"
-                    containerStyle={{ }}
-                    style={{ backgroundColor: '#ffffff' }}
+                    containerStyle={{}}
+                    style={{backgroundColor: '#ffffff'}}
                     position="bottomRight"
-                    onPress={() => this.setState({ active: !this.state.active })}>
-                    <Icon name="plus" style={{color:'black'}}/>
+                    onPress={() => this.props.navigation.navigate('AddNote')}>
+                    <Icon name="plus" style={{color: 'black'}}/>
                 </Fab>
             </Container>
         );
@@ -152,39 +94,34 @@ const styles = {
     search: {
         marginTop: 20,
         marginRight: 20,
-        marginLeft: 20
+        marginLeft: 20,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.20,
+        shadowRadius: 1.41,
+
+        elevation: 2,
     },
     content: {
         flexDirection: 'row',
         flexWrap: 'wrap',
     },
-    title: {
+    headerText: {
         fontSize: 20,
-        fontWeight: 'bold',
-        color: 'white',
-        marginTop: 20
+        margin: 10,
+        fontWeight: "bold"
     },
-    category: {
-        fontSize: 12,
-        fontWeight: 'bold',
-        color: 'white'
-    },
-    note: {
-        marginTop: 20,
-        fontSize: 17,
-        color: 'white',
-    },
-    cardItem: {
-        backgroundColor: colorBg(),
-        height: 145,
-        width: 145,
-    },
-    date: {
-        fontSize: 14,
-        color: 'white',
-        alignSelf: 'flex-end'
+    menuContent: {
+        color: "#000",
+        fontWeight: "bold",
+        padding: 2,
+        fontSize: 20
     }
 };
+
 function colorBg() {
     let colorArray = [];
 
