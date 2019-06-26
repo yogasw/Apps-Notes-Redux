@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import {Body, Left, Right, Title} from "native-base";
-import {TouchableOpacity} from "react-native";
+import {Body, Left, Right, Header, Title} from "native-base";
+import {Image, Text, TouchableOpacity, View} from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Menu, {MenuItem} from "react-native-material-menu";
-import {Header} from 'native-base';
 
 
 class HeaderMenu extends Component {
@@ -14,9 +13,7 @@ class HeaderMenu extends Component {
         this.state = {
             active: 'true'
         };
-        const navigate = this.props.navigate;
     }
-
     setMenuRef = ref => {
         this._menu = ref;
     };
@@ -30,27 +27,44 @@ class HeaderMenu extends Component {
     };
 
     render() {
+        const {title, optionIcon, optionPress, leftIcon, leftPress} = this.props;
         return (
-            <Header style={{backgroundColor: '#ffffff'}}>
-                <Left>
-                    <TouchableOpacity
-                        transparent
-                        onPress={() => this.props.navigation.openDrawer()}>
-                        <Icon color="black" size={25} name="menu"/>
-                    </TouchableOpacity>
-                </Left>
-                <Body>
-                    <Title style={{color: 'black'}}>Note App</Title>
-                </Body>
-                <Right>
-                    <Menu
-                        ref={this.setMenuRef}
-                        button={<Icon color="black" size={25} onPress={this.showMenu} name="sort-descending"/>}
-                    >
-                        <MenuItem onPress={this.hideMenu}>Asc</MenuItem>
-                        <MenuItem onPress={this.hideMenu}>Desc</MenuItem>
-                    </Menu>
-                </Right>
+            <Header style={{backgroundColor: '#ffffff', justifyContent: 'space-between', alignItems: 'center'}}>
+                <View>
+                    {
+                        optionIcon == 'home' ? (
+                            <TouchableOpacity
+                                transparent
+                                onPress={leftPress}>
+                                <Image source={require('../Assets/icon.jpg')}
+                                       style={{width: 30, height: 30, borderRadius: 100}}/>
+                            </TouchableOpacity>
+                        ) : (
+                            <TouchableOpacity
+                                transparent
+                                onPress={leftPress || {}}>
+                                <Icon color="black" size={25} name={leftIcon || "keyboard-backspace"}/>
+                            </TouchableOpacity>
+                        )
+                    }
+                </View>
+                <View>
+                    <Title style={{color: 'black'}}>{title || 'Title Default'}</Title>
+                </View>
+                <View>
+                    {
+                        optionIcon == 'home' ?
+                            (<Menu
+                                ref={this.setMenuRef}
+                                button={<Icon color="black" size={25} onPress={this.showMenu} name="sort-descending"/>}>
+                                <MenuItem onPress={this.hideMenu}>Asc</MenuItem>
+                                <MenuItem onPress={this.hideMenu}>Desc</MenuItem>
+                            </Menu>)
+                            :
+                            (<Icon color="black" size={25} onPress={optionPress} name={optionIcon || 'home'}/>)
+                    }
+
+                </View>
             </Header>
         );
     }

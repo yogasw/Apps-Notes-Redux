@@ -1,26 +1,45 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {Text} from "native-base";
-import {View, TouchableOpacity} from "react-native";
-import {NavigationActions} from "react-navigation";
+import {View, TouchableOpacity, StyleSheet} from "react-native";
 
-class Box extends Component {
+class Box extends PureComponent {
+
+    initStyle = () => {
+        if (this.props.bgColor != null || this.props.bgColor != undefined) {
+            this.bgColor = this.props.bgColor;
+        }
+        if (this.props.textColor != null || this.props.textColor != undefined) {
+            this.textColor = this.props.textColor;
+        }
+    };
 
     render() {
+        this.initStyle();
         const {time, title, category, note, onPress} = this.props;
         return (
             <TouchableOpacity onPress={onPress}>
-                <View style={styles.box}>
-                    <Text style={styles.date} right>{time}</Text>
-                    <Text style={styles.title}>{title}</Text>
-                    <Text style={styles.category}>{category}</Text>
-                    <Text style={styles.note}>{note}</Text>
+                <View style={[styles.box, {
+                    backgroundColor: this.bgColor || 'orange',
+                }]}>
+                    <Text style={[styles.date, {
+                        color: this.textColor || 'white',
+                    }]} right>{time}</Text>
+                    <Text style={[styles.title, {
+                        color: this.textColor || 'white',
+                    }]}>{title}</Text>
+                    <Text style={[styles.category, {
+                        color: this.textColor || 'white',
+                    }]}>{category}</Text>
+                    <Text style={[styles.note, {
+                        color: this.textColor || 'white',
+                    }]}>{note}</Text>
                 </View>
             </TouchableOpacity>
         )
     }
 }
 
-const styles = {
+const styles = StyleSheet.create({
     date: {
         fontSize: 12,
         color: 'white',
@@ -31,25 +50,21 @@ const styles = {
     title: {
         fontSize: 17,
         fontWeight: 'bold',
-        color: 'white',
         marginTop: 15,
         marginLeft: 10
     },
     category: {
         fontSize: 12,
         fontWeight: 'bold',
-        color: 'white',
         marginLeft: 10
     },
     note: {
         marginTop: 10,
         fontSize: 13,
-        color: 'white',
         paddingBottom: 20,
         marginLeft: 10
     },
     box: {
-        backgroundColor: 'orange',
         height: 150,
         width: 150,
         borderRadius: 15,
@@ -64,20 +79,5 @@ const styles = {
 
         elevation: 21,
     },
-};
-
-function colorBg() {
-    let colorArray = [];
-
-    for (let i = 0; i < 3; i++) {
-        colorArray.push(Math.floor(Math.random() * (255 - 0) + 0));
-    }
-    // rgb -> hex
-    let color = colorArray
-        .map(x => x.toString(16))
-        .join('');
-    return `#${color}`;
-
-}
-
+});
 export default Box;

@@ -4,6 +4,7 @@ import {
 } from "native-base";
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import HeaderMenu from "../Components/HeaderMenu";
 
 export default class HomeScreen extends React.Component {
     constructor(props) {
@@ -16,27 +17,13 @@ export default class HomeScreen extends React.Component {
     render() {
         return (
             <Container>
-                <Header style={{backgroundColor: '#ffffff'}}>
-                    <Left>
-                        <Button
-                            transparent
-                            onPress={() => this.props.navigation.navigate("Home")}>
-                            <Icon color="black" size={25} name="keyboard-backspace"/>
-                        </Button>
-                    </Left>
-                    <Body>
-                        <Title style={{color: 'black'}}>Add Note</Title>
-                    </Body>
-                    <Right>
-                        <Button
-                            transparent
-                            onPress={() => {
-                                this.props.navigation.navigate('Home')
-                            }}>
-                            <Icon name="check-circle-outline" color="#3DB39E" size={25}/>
-                        </Button>
-                    </Right>
-                </Header>
+                <HeaderMenu
+                    leftPress={() => this.props.navigation.navigate("Home")}
+                    leftIcon="keyboard-backspace"
+                    optionPress={() => this.props.navigation.navigate('Home')}
+                    optionIcon='check-circle-outline'
+                    title="Add Note"
+                />
                 <Content padder>
                     <Form>
                         <Textarea rowSpan={5} placeholder="ADD TITLE ..."/>

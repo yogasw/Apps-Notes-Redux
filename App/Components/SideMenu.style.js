@@ -4,12 +4,13 @@ export default {
         flex: 1
     },
     navItemStyle: {
-        paddingLeft: 25,
+        paddingLeft: 15,
+        paddingRight: 5,
     },
     logo: {
         borderWidth: 0,
-        width: 150,
-        height: 150,
+        width: 100,
+        height: 100,
         backgroundColor: '#fff',
         borderRadius: 100,
         alignSelf: 'center'
@@ -21,24 +22,22 @@ export default {
         marginBottom: 20,
         fontWeight: 'bold'
     },
-    drawCategory: {
-        fontSize: 17,
-        fontWeight: 'bold',
-    },
-    drawAddCategory: {
-        fontSize: 17,
-        fontWeight: 'bold',
-    },
-    drawIcon: {
-        paddingRight: 15
-    },
-    containerDrawCategory: {
-        flexDirection: 'row',
-        paddingTop: 5,
-    },
+
+
     containerAddDrawCategory: {
         flexDirection: 'row',
-        paddingTop: 15
+        marginTop: 10,
+        paddingTop: 5,
+        paddingBottom: 5,
+    },
+    textDrawAddCategory: {
+        fontSize: 17,
+        fontWeight: 'bold',
+    },
+    activeMenu: {
+        color: 'white',
+        backgroundColor: 'gray',
     }
+
 
 };

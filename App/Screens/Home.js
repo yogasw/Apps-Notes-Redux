@@ -6,74 +6,125 @@ import {
 } from "native-base";
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {View, TouchableOpacity} from "react-native";
-import Menu, {MenuItem} from 'react-native-material-menu';
+import {View, FlatList} from "react-native";
 import Box from '../Components/Box';
 import EditNote from "./EditNote";
+import HeaderMenu from '../Components/HeaderMenu'
 
 export default class HomeScreen extends React.Component {
-    _menu = null;
 
     constructor(props) {
         super(props);
         this.state = {
-            active: 'true'
-        };
-        const navigate = this.props.navigate;
+            active: 'true',
+            dummyData: [
+                {
+                    title: 'Note 1',
+                    category: 'Note 1',
+                    note: 'tanggal',
+                    date: 'tanggal'
+                },
+                {
+                    title: 'Note 1',
+                    category: 'Note 1',
+                    note: 'tanggal',
+                    date: 'tanggal'
+                },
+                {
+                    title: 'Note 1',
+                    category: 'Note 1',
+                    note: 'tanggal',
+                    date: 'tanggal'
+                },
+                {
+                    title: 'Note 1',
+                    category: 'Note 1',
+                    note: 'tanggal',
+                    date: 'tanggal'
+                },
+                {
+                    title: 'Note 1',
+                    category: 'Note 1',
+                    note: 'tanggal',
+                    date: 'tanggal'
+                },
+                {
+                    title: 'Note 1',
+                    category: 'Note 1',
+                    note: 'tanggal',
+                    date: 'tanggal'
+                },
+                {
+                    title: 'Note 1',
+                    category: 'Note 1',
+                    note: 'tanggal',
+                    date: 'tanggal'
+                },
+                {
+                    title: 'Note 1',
+                    category: 'Note 1',
+                    note: 'tanggal',
+                    date: 'tanggal'
+                },
+                {
+                    title: 'Note 1',
+                    category: 'Note 1',
+                    note: 'tanggal',
+                    date: 'tanggal'
+                },
+                {
+                    title: 'Note 1',
+                    category: 'Note 1',
+                    note: 'tanggal',
+                    date: 'tanggal'
+                },
+                {
+                    title: 'Note 1',
+                    category: 'Note 1',
+                    note: 'tanggal',
+                    date: 'tanggal'
+                },
+                {
+                    title: 'Note 1',
+                    category: 'Note 1',
+                    note: 'tanggal',
+                    date: 'tanggal'
+                },
+                {
+                    title: 'Note 1',
+                    category: 'Note 1',
+                    note: 'tanggal',
+                    date: 'tanggal'
+                }
+            ]
+        }
     }
-
-    setMenuRef = ref => {
-        this._menu = ref;
-    };
-
-    hideMenu = () => {
-        this._menu.hide();
-    };
-
-    showMenu = () => {
-        this._menu.show();
-    };
 
     render() {
         const {navigate} = this.props.navigation;
         return (
             <Container>
-                <Header style={{backgroundColor: '#ffffff'}}>
-                    <Left>
-                        <TouchableOpacity
-                            transparent
-                            onPress={() => this.props.navigation.openDrawer()}>
-                            <Icon color="black" size={25} name="menu"/>
-                        </TouchableOpacity>
-                    </Left>
-                    <Body>
-                        <Title style={{color: 'black'}}>Note App</Title>
-                    </Body>
-                    <Right>
-                        <Menu
-                            ref={this.setMenuRef}
-                            button={<Icon color="black" size={25} onPress={this.showMenu} name="sort-descending"/>}
-                        >
-                            <MenuItem onPress={this.hideMenu}>Asc</MenuItem>
-                            <MenuItem onPress={this.hideMenu}>Desc</MenuItem>
-                        </Menu>
-                    </Right>
-                </Header>
+                <HeaderMenu
+                    leftPress={() => this.props.navigation.openDrawer()}
+                    title="Note App"
+                    optionIcon='home'
+                />
                 <Item rounded style={styles.search}>
                     <Input placeholder='Search...'/>
                 </Item>
                 <Content padder>
                     <View style={styles.content}>
-                        <Box time="2019" title="Judul" category="Kategori 1" note="Hari ini makan 1" color="white"
-                             onPress={() => navigate('EditNote')}/>
-                        <Box time="2019" title="Judul" category="Kategori 2" note="Hari ini makan 1" color="white"
-                             onPress={() => navigate('EditNote')}/>
-                        <Box time="2019" title="Judul" category="Kategori 3" note="Hari ini makan 1" color="white"
-                             onPress={() => navigate('EditNote')}/>
-                        <Box time="2019" title="Judul" category="Kategori 4" note="Hari ini makan 1" color="white"
-                             onPress={() => navigate('EditNote')}/>
-                        <Box time="2019" title="Judul" category="Kategori 5" note="Hari ini makan 1" color="white"
-                             onPress={() => navigate('EditNote')}/>
+                        <FlatList
+                            data={this.state.dummyData}
+                            numColumns={2}
+                            renderItem={({item}) =>
+                                <Box time="2019" title="Judul" category="Kategori 1" note="Hari ini makan 1"
+                                     bgColor={colorBg()}
+                                     textColor="white"
+                                     onPress={() => navigate('EditNote')}
+                                />
+                            }
+                        />
                     </View>
                 </Content>
                 <Fab
@@ -98,12 +149,12 @@ const styles = {
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
-            height: 1,
+            height: 2,
         },
-        shadowOpacity: 0.20,
-        shadowRadius: 1.41,
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
 
-        elevation: 2,
+        elevation: 5,
     },
     content: {
         flexDirection: 'row',
@@ -122,17 +173,11 @@ const styles = {
     }
 };
 
-function colorBg() {
-    let colorArray = [];
 
-    for (let i = 0; i < 3; i++) {
-        colorArray.push(Math.floor(Math.random() * (255 - 0) + 0));
-    }
-    // rgb -> hex
-    let color = colorArray
-        .map(x => x.toString(16))
-        .join('');
-    return `#${color}`;
+function colorBg() {
+    let color = ['e57373', 'F06292', 'BA68C8', '9575CD', '7986CB', '64B5F6'];
+    let ukuran = Math.floor(Math.random() * 5) + 0;
+    return `#${color[ukuran]}`;
 
 }
 
