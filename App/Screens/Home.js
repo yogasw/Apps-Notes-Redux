@@ -95,7 +95,7 @@ export default class HomeScreen extends React.Component {
                         <FlatList
                             data={this.state.dummyData}
                             numColumns={2}
-                            keyExtractor={(item, index) => index.toString()}
+                            keyExtractor={(item, index) => item.id.toString()}
                             renderItem={({item, index}) =>
                                 <Box
                                     time={item.date}
@@ -128,18 +128,13 @@ const styles = {
     search: {
         paddingLeft: 20,
         paddingRight: 20,
-        marginTop: 10,
+        marginTop: 90,
         marginBottom: 10,
         marginRight: 20,
         marginLeft: 20,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
+        position: 'absolute',
+        backgroundColor: '#fff',
+        zIndex: 1
     },
     content: {
         flexDirection: 'row',
