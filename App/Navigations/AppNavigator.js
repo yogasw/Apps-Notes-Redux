@@ -17,7 +17,7 @@ const AppNavigator = createDrawerNavigator({
     },
     EditNote: {
         screen: EditNote,
-    }
+    },
 }, {
     contentComponent: SideMenu,
     drawerWidth: 200
