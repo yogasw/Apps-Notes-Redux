@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {Body, Left, Right, Header, Title} from "native-base";
-import {Image, Text, TouchableOpacity, View} from "react-native";
+import {Header, Title} from "native-base";
+import {Image, TouchableOpacity, View} from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Menu, {MenuItem} from "react-native-material-menu";
 
