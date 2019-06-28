@@ -1,6 +1,6 @@
 import React from "react";
 import {
-    Container, Content, Form, Textarea, Picker, Text, Toast
+    Container, Content, Form, Textarea, Picker, Text,
 } from "native-base";
 import {getCategories, postNote} from "../Services/Apis";
 import HeaderMenu from "../Components/HeaderMenu";
