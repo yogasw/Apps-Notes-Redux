@@ -6,7 +6,6 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {FlatList, RefreshControl, View, ActivityIndicator} from "react-native";
 import Box from '../Components/Box';
-import EditNote from "./EditNote";
 import HeaderMenu from '../Components/HeaderMenu'
 import {getNotes} from '@Apis'
 import color from "../Helper/Color";
@@ -73,7 +72,12 @@ export default class HomeScreen extends React.Component {
                                 note={item.note}
                                 bgColor={color()}
                                 textColor="white"
-                                onPress={() => navigate('EditNote')}
+                                onPress={() => navigate('EditNote', {
+                                    id: item.id,
+                                    title: item.title,
+                                    category: item.id_category,
+                                    note: item.note,
+                                })}
                             />
                         }
                         refreshControl={
