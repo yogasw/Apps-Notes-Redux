@@ -3,7 +3,7 @@ import {
     Container, Content, Form, Textarea, Picker, Text
 } from "native-base";
 import HeaderMenu from "../Components/HeaderMenu";
-import {View, Dimensions} from "react-native";
+import {View} from "react-native";
 
 export default class HomeScreen extends React.Component {
     constructor(props) {
@@ -20,7 +20,6 @@ export default class HomeScreen extends React.Component {
         let {width, height} = event.nativeEvent.layout;
         this.state.widthScrren = width;
         this.state.heightScreen = height;
-        console.log(this.state.widthScrren);
     }; // width, height, x, y
 
     render() {
