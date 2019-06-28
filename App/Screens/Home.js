@@ -9,7 +9,7 @@ import Box from '../Components/Box';
 import EditNote from "./EditNote";
 import HeaderMenu from '../Components/HeaderMenu'
 import {getNotes} from '@Apis'
-import Color from "../Helper/Color";
+import color from "../Helper/Color";
 import styles from './Home.style';
 
 export default class HomeScreen extends React.Component {
@@ -72,7 +72,7 @@ export default class HomeScreen extends React.Component {
                                 title={item.title}
                                 category={item.name_category}
                                 note={item.note}
-                                bgColor={Color}
+                                bgColor={color()}
                                 textColor="white"
                                 onPress={() => navigate('EditNote')}
                             />
