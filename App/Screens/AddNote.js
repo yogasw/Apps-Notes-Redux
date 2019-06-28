@@ -6,7 +6,7 @@ import {getCategories, postNote} from "../Services/Apis";
 import HeaderMenu from "../Components/HeaderMenu";
 import {Alert} from "react-native";
 
-export default class HomeScreen extends React.Component {
+export default class AddNote extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -100,7 +100,9 @@ export default class HomeScreen extends React.Component {
                         <Picker
                             mode='dropdown'
                             style={{width: this.state.widthScrren}}
-                            onValueChange={(selectedCategory) => this.setState({selectedCategory})}>
+                            onValueChange={(selectedCategory) => this.setState({selectedCategory})}
+                            selectedValue={this.state.selectedCategory}
+                        >
                             {
                                 Object.keys(this.state.listCategories).map((key) => (
                                     <Picker.Item key={key} label={this.state.listCategories[key].name}
