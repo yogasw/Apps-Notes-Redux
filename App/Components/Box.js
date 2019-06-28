@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     box: {
         height: 150,
         width: 150,
-        borderRadius: 15,
+        borderRadius: 20,
         margin: 10,
 
     },
