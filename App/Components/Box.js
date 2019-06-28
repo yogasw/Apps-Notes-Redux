@@ -24,7 +24,7 @@ class Box extends PureComponent {
                     <Text
                         numberOfLines={1}
                         style={[styles.date, {
-                        color: this.textColor || 'white',
+                            color: this.textColor || 'white'
                     }]} right>{time}</Text>
                     <Text
                         numberOfLines={1}
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
         fontSize: 12,
         color: 'white',
         alignSelf: 'flex-end',
-        marginRight: 15,
+        marginRight: -5,
         marginTop: 10,
         width: 70
     },
