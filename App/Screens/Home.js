@@ -39,7 +39,6 @@ export default class HomeScreen extends React.Component {
 
     render() {
         const {navigate} = this.props.navigation;
-        console.log(this.state.data);
         if (this.state.isFetching) {
             return (
                 <View style={{flex: 1, paddingTop: 90}}>

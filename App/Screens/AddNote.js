@@ -1,11 +1,10 @@
 import React from "react";
 import {
-    Container, Content, Form, Textarea, Picker, Text
+    Container, Content, Form, Textarea, Picker, Text, Toast
 } from "native-base";
 import {getCategories, postNote} from "../Services/Apis";
 import HeaderMenu from "../Components/HeaderMenu";
 import {Alert} from "react-native";
-
 
 export default class HomeScreen extends React.Component {
     constructor(props) {
@@ -35,17 +34,29 @@ export default class HomeScreen extends React.Component {
     }; // width, height, x, y
 
     addNote = () => {
-        console.log("masuk1");
-        let formData = new FormData();
-        formData.append('title', this.state.title);
-        formData.append('note', this.state.description);
-        formData.append('id_category', this.state.selectedCategory);
+        if (this.state.title != '' &&
+            this.state.description != '' &&
+            this.state.selectedCategory != '') {
 
-        postNote(formData).then(response => {
-            Alert.alert("Note Berhasil di kirim");
-        }).catch(e => {
-            throw e;
-        })
+            let data = {
+                'title': this.state.title,
+                'note': this.state.description,
+                'id_category': this.state.selectedCategory
+            };
+
+            postNote(data).then(response => {
+                if (response.data.status == '200') {
+                    Alert.alert(response.data.values.message);
+                    this.props.navigation.navigate("Home");
+                } else {
+                    Alert.alert("Input Note Failed")
+                }
+            }).catch(e => {
+                throw e;
+            })
+        } else {
+            Alert.alert("Field note or title cannot empty");
+        }
     };
 
     render() {
