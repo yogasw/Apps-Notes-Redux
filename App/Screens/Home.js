@@ -233,11 +233,11 @@ export default class HomeScreen extends React.Component {
                 </Item>
                 <ScrollView>
                     <Content>
-                    <View style={styles.content}>
                         <FlatList
                             style={styles.flatList}
                             data={this.state.dummyData}
                             horizontal={false}
+                            numColumns={2}
                             keyExtractor={(item, index) => item.id.toString()}
                             renderItem={({item, index}) =>
                                 <Box
@@ -251,7 +251,6 @@ export default class HomeScreen extends React.Component {
                                 />
                             }
                         />
-                    </View>
                     </Content>
                 </ScrollView>
                 <Fab
@@ -298,7 +297,8 @@ const styles = {
         fontSize: 20
     },
     flatList: {
-        marginTop: 90,
+        marginTop: 100,
+        alignSelf: 'center',
     }
 };
 

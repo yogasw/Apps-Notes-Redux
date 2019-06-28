@@ -32,12 +32,18 @@ export default class HomeScreen extends React.Component {
                     optionPress={() => this.props.navigation.navigate('Home')}
                     optionIcon='check-circle-outline'
                     title="Edit Note"
+                    optionColor='#3db39e'
                 />
                 <Content padder>
                     <Form>
-                        <Textarea rowSpan={5} placeholder="ADD TITLE ..."/>
-                        <Textarea rowSpan={5} placeholder="ADD DESCRIPTION ..."/>
-                        <Text style={{color: 'black'}}>CATEGORY</Text>
+                        <Textarea rowSpan={2} placeholder="ADD TITLE ..." style={{
+                            fontSize: 20,
+                            marginTop: 50
+                        }}/>
+                        <Textarea rowSpan={5} placeholder="ADD DESCRIPTION ..." style={{
+                            fontSize: 20,
+                        }}/>
+                        <Text style={{color: 'black', fontSize: 20, fontWeight: 'bold',}}>CATEGORY</Text>
                         <View style={{width: this.state.widthScrren}}>
                             <Picker
                                 mode='dropdown'

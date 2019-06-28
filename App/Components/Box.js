@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     },
     note: {
         marginTop: 10,
-        fontSize: 13,
+        fontSize: 12,
         paddingBottom: 20,
         marginLeft: 10,
         width: 125,

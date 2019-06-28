@@ -27,7 +27,7 @@ class HeaderMenu extends Component {
     };
 
     render() {
-        const {title, optionIcon, optionPress, leftIcon, leftPress} = this.props;
+        const {title, optionIcon, optionColor, optionPress, leftIcon, leftPress} = this.props;
         return (
             <Header style={{backgroundColor: '#ffffff', justifyContent: 'space-between', alignItems: 'center'}}>
                 <View>
@@ -61,7 +61,8 @@ class HeaderMenu extends Component {
                                 <MenuItem onPress={this.hideMenu}>Desc</MenuItem>
                             </Menu>)
                             :
-                            (<Icon color="black" size={25} onPress={optionPress} name={optionIcon || 'home'}/>)
+                            (<Icon color={optionColor || 'black'} size={25} onPress={optionPress}
+                                   name={optionIcon || 'home'}/>)
                     }
 
                 </View>

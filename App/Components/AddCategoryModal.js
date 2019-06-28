@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, TouchableOpacity, View, StyleSheet, Dimensions} from 'react-native';
+import {Text, TextInput, TouchableOpacity, View, StyleSheet, Dimensions} from 'react-native';
 
 
 class AddCategoryModal extends Component {
@@ -11,46 +11,64 @@ class AddCategoryModal extends Component {
         Dimensions.addEventListener('change', (e) => {
             this.setState(e.window);
         });
-        this.handleLayoutChange = this.handleLayoutChange.bind(this);
     }
 
-    handlePress(evt) {
-        console.log(`x coord = ${evt.nativeEvent.locationX}`);
-    }
-
-    handleLayoutChange() {
-        this.feedPost.measure((fx, fy, width, height, px, py) => {
-            console.log('Component width is: ' + width)
-            console.log('Component height is: ' + height)
-            console.log('X offset to page: ' + px)
-            console.log('Y offset to page: ' + py)
-        })
+    closeModal() {
+        this.props.changeModalVisibilty(false);
     }
 
     render() {
 
         return (
-            <View
-                style={[styles.contentContainer]}>
+            <TouchableOpacity
+                activeOpacity={1}
+                disable={true}
+                onPress={() => this.closeModal()}
+                style={[styles.contentContainer]}
+            >
                 <TouchableOpacity
                     activeOpacity={1}
-                    disable={true}
-                    onPress={(evt) => this.handlePress(evt)}
-                    ref={view => {
-                        this.feedPost = view;
-                    }}
+                    style={{opacity: 1}}
                 >
                     <View
-                        onLayout={(event) => {
-                            this.handleLayoutChange(event)
-                        }}
                         style={[styles.modal, {
                             width: this.state.width - 80
                         }]}>
-                        <Text>Ini Pop UP</Text>
+                        <TextInput
+                            placeholder="Category Name"
+                            underlineColorAndroid="#2ED1A2"
+                            style={{
+                                width: this.state.width - 120
+                            }}
+                        />
+                        <TextInput
+                            placeholder="Image Url"
+                            underlineColorAndroid="#2ED1A2"
+                            style={{
+                                width: this.state.width - 120
+                            }}
+                        />
+                        <View style={{
+                            display: 'flex',
+                            justifyContent: 'flex-end',
+                            flexDirection: 'row',
+                            marginTop: 20,
+                            width: this.state.width - 120
+                        }}>
+                            <Text style={{
+                                fontWeight: 'bold',
+                                marginRight: 10,
+                                fontSize: 20,
+                            }}>Add</Text>
+                            <Text
+                                onPress={() => this.closeModal()}
+                                style={{
+                                    fontSize: 20,
+                                }}>Cancel</Text>
+                        </View>
                     </View>
                 </TouchableOpacity>
-            </View>
+            </TouchableOpacity>
         )
     }
 }
@@ -63,12 +81,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: 'gray',
-        opacity: 0.8
+        opacity: 0.9
 
     },
     modal: {
-        height: 150,
-        padding: 10,
+        height: 200,
         alignSelf: 'center',
         alignItems: 'center',
         textAlign: 'center',

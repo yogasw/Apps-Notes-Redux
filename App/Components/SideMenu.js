@@ -4,6 +4,7 @@ import styles from './SideMenu.style';
 import {Image, ScrollView, Text, View, TouchableOpacity, Modal} from 'react-native';
 import ItemDrawMenu from './ItemDrawMenu';
 import PopupCategory from '../Components/AddCategoryModal';
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 class SideMenu extends Component {
     constructor() {
@@ -21,9 +22,9 @@ class SideMenu extends Component {
         this.props.navigation.navigate(route);
     }
 
-    changeModalVisibilty = (bool) => {
 
-        console.log("Masuk " + bool)
+    changeModalVisibilty = (bool) => {
+        if (bool) this.props.navigation.closeDrawer();
         this.setState({isModalVisible: bool});
     };
 
@@ -42,12 +43,25 @@ class SideMenu extends Component {
                                       activeMenu={this.state.onMenu}/>
                         <ItemDrawMenu title="Wishlist" icon="list" isPress={this._isPress} routeName="Wishlist"
                                       activeMenu={this.state.onMenu}/>
-                        <ItemDrawMenu title="Add Category" icon="control-point" marginTop={20} isPress={this._isPress}
-                                      routeName="AddNote" activeMenu={this.state.onMenu}/>
-                        <ItemDrawMenu title="Pop Category" icon="control-point" marginTop={20} isPress={this._isPress}
-                                      routeName="CategoryNote" activeMenu={this.state.onMenu}/>
+
                         <TouchableOpacity onPress={() => this.changeModalVisibilty(true)}>
-                            <Text>Open</Text>
+                            <View style={{
+                                flexDirection: 'row',
+                                paddingTop: 15,
+                                paddingBottom: 5,
+                            }}>
+                                <Icon name='control-point' size={20} style={{
+                                    color: 'gray',
+                                    paddingRight: 15,
+                                }}/>
+                                <Text style={{
+                                    color: 'gray',
+                                    fontSize: 17,
+                                    fontWeight: 'bold',
+                                }}>
+                                    Add Category
+                                </Text>
+                            </View>
                         </TouchableOpacity>
                     </View>
                 </ScrollView>
@@ -56,8 +70,7 @@ class SideMenu extends Component {
                     transparent={true}
                     visible={this.state.isModalVisible}
                     onRequestClose={() => this.changeModalVisibilty(false)}>
-
-                    <PopupCategory/>
+                    <PopupCategory changeModalVisibilty={this.changeModalVisibilty}/>
                 </Modal>
             </View>
         );
