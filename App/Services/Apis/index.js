@@ -12,3 +12,6 @@ export const postNote = (data) => {
 export const getCategories = () => {
     return xhr(URL_GET_CATEGORIES, "GET");
 };
+export const patchNotes = (id, data) => {
+    return xhr(URL_NOTES + '/' + id, "PATCH", data);
+};

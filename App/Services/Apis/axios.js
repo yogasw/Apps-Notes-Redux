@@ -9,6 +9,9 @@ const xhr = async (url, method, data, headers,) => {
     };
     try {
         const response = await axios(options);
+
+        console.log("Masuk Axios");
+        console.log(options);
         return response;
     } catch (e) {
         //console.log(e);
