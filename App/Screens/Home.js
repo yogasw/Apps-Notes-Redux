@@ -4,7 +4,7 @@ import {
 } from "native-base";
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {FlatList, RefreshControl, View, ActivityIndicator} from "react-native";
+import {FlatList, RefreshControl, View, ActivityIndicator, AlertStatic as Alert} from "react-native";
 import Box from '../Components/Box';
 import HeaderMenu from '../Components/HeaderMenu'
 import {getNotes} from '@Apis'
@@ -20,7 +20,8 @@ export default class HomeScreen extends React.Component {
             heightScreen: null,
             maxBox: null,
             data: [],
-            isFetching: false
+            isFetching: false,
+            search: '',
         };
     }
 
@@ -28,14 +29,41 @@ export default class HomeScreen extends React.Component {
         this.getNotesApi();
     }
 
-    getNotesApi() {
-        getNotes().then(respons => {
-            this.setState({data: respons.data.values});
+    getNotesApi(search = '') {
+        getNotes(search).then(respons => {
+            if (respons.data.status == '200') {
+                this.setState({
+                    data: respons.data.values,
+                    isFetching: false
+                });
+            } else {
+                this.setState({data: [], isFetching: false});
+            }
         }).catch(e => {
+            this.setState({data: [], isFetching: false});
             console.log(e)
         })
     }
 
+    deleteNoteApi() {
+        console.log("long press masuk");
+        Alert.alert("Alert", 'Are you sure to delete note', [
+            {
+                text: 'cancel'
+            },
+            {
+                text: 'ok',
+                onPress: () => {
+                    deleteNote().then(respons => {
+                        Alert.alert('Note Deleted');
+                    }).catch(e => {
+                        Alert.alert('Delete data from api failed');
+                        console.log(e);
+                    })
+                }
+            }
+        ]);
+    }
     render() {
         const {navigate} = this.props.navigation;
         if (this.state.isFetching) {
@@ -53,7 +81,10 @@ export default class HomeScreen extends React.Component {
                     optionIcon='home'
                 />
                 <Item rounded style={styles.search}>
-                    <Input placeholder='Search...'/>
+                    <Input
+                        onSubmitEditing={() => this.getNotesApi(this.state.search)}
+                        onChangeText={(search) => this.setState({search})}
+                        placeholder='Search...'/>
                 </Item>
                 <Content
                     contentContainerStyle={{flex: 1, alignItems: 'center'}}
@@ -70,8 +101,9 @@ export default class HomeScreen extends React.Component {
                                 title={item.title}
                                 category={item.name_category}
                                 note={item.note}
-                                bgColor={color()}
+                                bgColor={color(item.id_category)}
                                 textColor="white"
+                                longPress={() => console.log("masuk1")}
                                 onPress={() => navigate('EditNote', {
                                     id: item.id,
                                     title: item.title,
