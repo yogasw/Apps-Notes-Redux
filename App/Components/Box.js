@@ -19,12 +19,12 @@ class Box extends PureComponent {
     };
     render() {
         this.initStyle();
-        const {time, title, category, note, longPress, onPress} = this.props;
+        const {id, time, title, category, note, longPress, onPress} = this.props;
 
         return (
             <TouchableOpacity
-                delayLongPress={3800}
-                onLongPress={() => this.handlerClick}
+                delayLongPress={100}
+                onLongPress={longPress}
                 onPress={onPress}>
                 <View style={[styles.box, {
                     backgroundColor: this.bgColor || 'orange',

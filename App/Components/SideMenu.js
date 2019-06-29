@@ -5,6 +5,7 @@ import {Image, ScrollView, Text, View, TouchableOpacity, Modal} from 'react-nati
 import ItemDrawMenu from './ItemDrawMenu';
 import PopupCategory from '../Components/AddCategoryModal';
 import Icon from "react-native-vector-icons/MaterialIcons";
+import {getCategories} from "../Services/Apis";
 
 class SideMenu extends Component {
     constructor() {
@@ -12,8 +13,26 @@ class SideMenu extends Component {
         this._isPress = this._isPress.bind(this);
         this.state = {
             onMenu: 'Home',
-            isModalVisible: false
+            isModalVisible: false,
+            listCategories: []
         }
+    }
+
+    componentDidMount() {
+        this.getCategoriesApi();
+    }
+
+    getCategoriesApi() {
+        getCategories().then(response => {
+            if (response.data.status == 200) {
+                console.log(response);
+                this.setState({listCategories: response.data.values})
+            } else {
+                console.log("error")
+            }
+        }).catch(e => {
+            throw e;
+        })
     }
 
     _isPress(route) {
@@ -21,7 +40,6 @@ class SideMenu extends Component {
         this.props.navigation.closeDrawer();
         this.props.navigation.navigate(route);
     }
-
 
     changeModalVisibilty = (bool) => {
         if (bool) this.props.navigation.closeDrawer();
@@ -35,6 +53,7 @@ class SideMenu extends Component {
                     <View style={styles.navItemStyle}>
                         <Image source={require('../Assets/icon.jpg')} style={styles.logo}/>
                         <Text style={styles.drawName}>Yoga Setiawan</Text>
+
                         <ItemDrawMenu title="Home" icon="home" isPress={this._isPress} routeName="Home"
                                       activeMenu={this.state.onMenu}/>
                         <ItemDrawMenu title="Personal" icon="account-circle" isPress={this._isPress}

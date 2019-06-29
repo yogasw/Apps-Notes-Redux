@@ -8,13 +8,8 @@ const xhr = async (url, method, data, headers,) => {
         url: url,
     };
     try {
-        const response = await axios(options);
-
-        console.log("Masuk Axios");
-        console.log(options);
-        return response;
+        return await axios(options);
     } catch (e) {
-        //console.log(e);
         throw e;
     }
 };

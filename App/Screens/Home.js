@@ -4,10 +4,10 @@ import {
 } from "native-base";
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {FlatList, RefreshControl, View, ActivityIndicator, AlertStatic as Alert} from "react-native";
+import {FlatList, RefreshControl, View, ActivityIndicator, Alert} from "react-native";
 import Box from '../Components/Box';
 import HeaderMenu from '../Components/HeaderMenu'
-import {getNotes} from '@Apis'
+import {getNotes, deleteNote} from '@Apis'
 import color from "../Helper/Color";
 import styles from './Home.style';
 
@@ -47,15 +47,17 @@ export default class HomeScreen extends React.Component {
             console.log(e)
         })
     }
-    deleteNoteApi() {
-        Alert.alert("Alert", 'Are you sure to delete note', [
+
+    deleteNoteApi(id) {
+        console.log(id);
+        Alert.alert("Alert", 'Are you sure to delete note : ' + id, [
             {
                 text: 'cancel'
             },
             {
                 text: 'ok',
                 onPress: () => {
-                    deleteNote().then(respons => {
+                    deleteNote(id).then(respons => {
                         Alert.alert('Note Deleted');
                     }).catch(e => {
                         Alert.alert('Delete data from api failed');
@@ -107,7 +109,7 @@ export default class HomeScreen extends React.Component {
                                 note={item.note}
                                 bgColor={color(item.id_category)}
                                 textColor="white"
-                                longPress={() => console.log("masuk1")}
+                                longPress={() => this.deleteNoteApi(item.id)}
                                 onPress={() => navigate('EditNote', {
                                     id: item.id,
                                     title: item.title,
