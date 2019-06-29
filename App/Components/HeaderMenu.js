@@ -27,7 +27,7 @@ class HeaderMenu extends Component {
     };
 
     render() {
-        const {title, optionIcon, optionColor, optionPress, leftIcon, leftPress} = this.props;
+        const {title, optionIcon, optionColor, optionPress, leftIcon, leftPress, sort} = this.props;
         return (
             <Header style={{backgroundColor: '#ffffff', justifyContent: 'space-between', alignItems: 'center'}}>
                 <View>
@@ -57,8 +57,8 @@ class HeaderMenu extends Component {
                             (<Menu
                                 ref={this.setMenuRef}
                                 button={<Icon color="black" size={25} onPress={this.showMenu} name="sort-descending"/>}>
-                                <MenuItem onPress={this.hideMenu}>Asc</MenuItem>
-                                <MenuItem onPress={this.hideMenu}>Desc</MenuItem>
+                                <MenuItem onPress={() => sort('', 'ASC')}>Asc</MenuItem>
+                                <MenuItem onPress={() => sort('', 'DESC')}>Desc</MenuItem>
                             </Menu>)
                             :
                             (<Icon color={optionColor || 'black'} size={25} onPress={optionPress}

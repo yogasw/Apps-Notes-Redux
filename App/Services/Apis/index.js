@@ -2,8 +2,8 @@ import xhr from './axios'
 //ulr, Method, data, headler
 import {URL_GET_CATEGORIES, URL_NOTES} from "../../Configs/Apis";
 
-export const getNotes = (search = '') => {
-    let url = `${URL_NOTES}?search=${search}`;
+export const getNotes = (search = '', sort = 'DESC') => {
+    let url = `${URL_NOTES}?search=${search}&sort=${sort}`;
     console.log("url adalah " + url);
     return xhr(url, "GET");
 };

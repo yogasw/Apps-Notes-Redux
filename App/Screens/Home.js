@@ -22,15 +22,18 @@ export default class HomeScreen extends React.Component {
             data: [],
             isFetching: false,
             search: '',
+            sort: 'desc'
         };
+        this.getNotesApi = this.getNotesApi.bind(this);
     }
-
     componentDidMount() {
         this.getNotesApi();
     }
 
-    getNotesApi(search = '') {
-        getNotes(search).then(respons => {
+    getNotesApi(search = '', sort = '') {
+
+        console.log("search : " + search + " sort : " + sort);
+        getNotes(search, sort).then(respons => {
             if (respons.data.status == '200') {
                 this.setState({
                     data: respons.data.values,
@@ -44,9 +47,7 @@ export default class HomeScreen extends React.Component {
             console.log(e)
         })
     }
-
     deleteNoteApi() {
-        console.log("long press masuk");
         Alert.alert("Alert", 'Are you sure to delete note', [
             {
                 text: 'cancel'
@@ -79,6 +80,9 @@ export default class HomeScreen extends React.Component {
                     leftPress={() => this.props.navigation.openDrawer()}
                     title="Note App"
                     optionIcon='home'
+                    sort={(search, sort) => {
+                        this.getNotesApi(this.state.search, sort)
+                    }}
                 />
                 <Item rounded style={styles.search}>
                     <Input
