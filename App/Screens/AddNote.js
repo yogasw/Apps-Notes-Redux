@@ -12,25 +12,27 @@ class AddNote extends React.Component {
             selectedCategory: '',
             title: '',
             description: '',
-            listCategories: [],
+            //listCategories: [],
             widthScrren: null,
             heightScreen: null,
         };
     }
 
     componentDidMount() {
-        getCategories().then(response => {
+        this.props.dispatch(getCategories());
+        /* getCategories().then(response => {
             this.setState({listCategories: response.data.values});
         }).catch(e => {
             throw e;
-        })
+        })*/
     }
 
     _onLayout = event => {
         let {width, height} = event.nativeEvent.layout;
         this.state.widthScrren = width;
         this.state.heightScreen = height;
-    }; // width, height, x, y
+    }; // width, height, x,
+
 
     addNote = () => {
         if (this.state.title != '' &&
@@ -62,6 +64,8 @@ class AddNote extends React.Component {
     };
 
     render() {
+        console.log("ISI PROPS");
+        console.log(this.props.notes.categories);
         return (
             <Container onLayout={this._onLayout}>
                 <HeaderMenu
@@ -106,9 +110,9 @@ class AddNote extends React.Component {
                             selectedValue={this.state.selectedCategory}
                         >
                             {
-                                Object.keys(this.state.listCategories).map((key) => (
-                                    <Picker.Item key={key} label={this.state.listCategories[key].name}
-                                                 value={this.state.listCategories[key].id}/>
+                                Object.keys(this.props.notes.categories).map((key) => (
+                                    <Picker.Item key={key} label={this.props.notes.categories[key].name}
+                                                 value={this.props.notes.categories[key].id}/>
                                 ))
                             }
 

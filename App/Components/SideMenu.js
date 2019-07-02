@@ -5,7 +5,6 @@ import {Image, Modal, ScrollView, Text, TouchableOpacity, View} from 'react-nati
 import ItemDrawMenu from './ItemDrawMenu';
 import PopupCategory from '../Components/AddCategoryModal';
 import Icon from "react-native-vector-icons/MaterialIcons";
-import {getCategories} from "../Services/Redux/action/notes";
 
 class SideMenu extends Component {
     constructor() {
@@ -23,15 +22,15 @@ class SideMenu extends Component {
     }
 
     getCategoriesApi() {
-        getCategories().then(response => {
-            if (response.data.status == 200) {
-                this.setState({listCategories: response.data.values})
-            } else {
-                console.log("error")
-            }
-        }).catch(e => {
-            throw e;
-        })
+        /* getCategories().then(response => {
+             if (response.data.status == 200) {
+                 this.setState({listCategories: response.data.values})
+             } else {
+                 console.log("error")
+             }
+         }).catch(e => {
+             throw e;
+         })*/
     }
 
     _isPress(route) {
