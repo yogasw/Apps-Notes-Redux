@@ -1,7 +1,6 @@
 import React, {PureComponent} from 'react';
 import {Text} from "native-base";
-import {View, TouchableOpacity, StyleSheet, Alert} from "react-native";
-import {deleteNote} from "../Services/Apis";
+import {Alert, StyleSheet, TouchableOpacity, View} from "react-native";
 
 class Box extends PureComponent {
 
@@ -23,7 +22,7 @@ class Box extends PureComponent {
 
         return (
             <TouchableOpacity
-                delayLongPress={100}
+                delayLongPress={1000}
                 onLongPress={longPress}
                 onPress={onPress}>
                 <View style={[styles.box, {

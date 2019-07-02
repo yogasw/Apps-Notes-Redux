@@ -1,17 +1,16 @@
-import React from "react";
-import {
-    Container, Item, Content, Input, Fab,
-} from "native-base";
+import React, {Component} from "react";
+import {Container, Content, Fab, Input, Item,} from "native-base";
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {FlatList, RefreshControl, View, ActivityIndicator, Alert} from "react-native";
+import {ActivityIndicator, Alert, FlatList, RefreshControl, View} from "react-native";
 import Box from '../Components/Box';
 import HeaderMenu from '../Components/HeaderMenu'
-import {getNotes, deleteNote} from '@Apis'
 import color from "../Helper/Color";
 import styles from './Home.style';
+import {getNotes} from "../Services/Redux/action/notes";
+import {connect} from 'react-redux';
 
-export default class HomeScreen extends React.Component {
+class HomeScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -20,7 +19,6 @@ export default class HomeScreen extends React.Component {
             heightScreen: null,
             maxBox: null,
             data: [],
-            isFetching: false,
             search: '',
             sort: 'desc'
         };
@@ -31,21 +29,20 @@ export default class HomeScreen extends React.Component {
     }
 
     getNotesApi(search = '', sort = '') {
-
-        console.log("search : " + search + " sort : " + sort);
-        getNotes(search, sort).then(respons => {
-            if (respons.data.status == '200') {
-                this.setState({
-                    data: respons.data.values,
-                    isFetching: false
-                });
-            } else {
-                this.setState({data: [], isFetching: false});
-            }
-        }).catch(e => {
-            this.setState({data: [], isFetching: false});
-            console.log(e)
-        })
+        this.props.dispatch(getNotes(search, sort));
+        /* getNotes(search, sort).then(respons => {
+             if (respons.data.status == '200') {
+                 this.setState({
+                     data: respons.data.values,
+                     isFetching: false
+                 });
+             } else {
+                 this.setState({data: [], isFetching: false});
+             }
+         }).catch(e => {
+             this.setState({data: [], isFetching: false});
+             console.log(e)
+         })*/
     }
 
     deleteNoteApi(id) {
@@ -69,7 +66,7 @@ export default class HomeScreen extends React.Component {
     }
     render() {
         const {navigate} = this.props.navigation;
-        if (this.state.isFetching) {
+        if (this.props.notes.isLoading) {
             return (
                 <View style={{flex: 1, paddingTop: 90}}>
                     <ActivityIndicator/>
@@ -97,7 +94,7 @@ export default class HomeScreen extends React.Component {
                     onLayout={this._onLayout}>
                     <FlatList
                         style={styles.flatList}
-                        data={this.state.data}
+                        data={this.props.notes.data}
                         horizontal={false}
                         numColumns={2}
                         keyExtractor={(item, index) => item.id.toString()}
@@ -120,7 +117,7 @@ export default class HomeScreen extends React.Component {
                         }
                         refreshControl={
                             <RefreshControl
-                                refreshing={this.state.isFetching}
+                                refreshing={this.props.notes.isLoading}
                                 onRefresh={this.getNotesApi.bind(this)}/>
                         }
                     />
@@ -139,3 +136,11 @@ export default class HomeScreen extends React.Component {
         );
     }
 }
+
+const mapsStageToProps = (state) => {
+    return {
+        notes: state.notes
+    }
+};
+
+export default connect(mapsStageToProps)(HomeScreen)

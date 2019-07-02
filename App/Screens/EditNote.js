@@ -1,8 +1,6 @@
 import React from "react";
-import {
-    Container, Content, Form, Textarea, Picker, Text,
-} from "native-base";
-import {getCategories, patchNotes} from "../Services/Apis";
+import {Container, Content, Form, Picker, Text, Textarea,} from "native-base";
+import {getCategories, patchNotes} from "../Services/Redux/action/notes";
 import HeaderMenu from "../Components/HeaderMenu";
 import {Alert} from "react-native";
 

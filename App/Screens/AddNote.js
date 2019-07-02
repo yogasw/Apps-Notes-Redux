@@ -1,12 +1,11 @@
 import React from "react";
-import {
-    Container, Content, Form, Textarea, Picker, Text,
-} from "native-base";
-import {getCategories, postNote} from "../Services/Apis";
+import {Container, Content, Form, Picker, Text, Textarea,} from "native-base";
+import {getCategories, postNote} from "../Services/Redux/action/notes";
+import {connect} from 'react-redux';
 import HeaderMenu from "../Components/HeaderMenu";
 import {Alert} from "react-native";
 
-export default class AddNote extends React.Component {
+class AddNote extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -43,17 +42,20 @@ export default class AddNote extends React.Component {
                 'note': this.state.description,
                 'id_category': this.state.selectedCategory
             };
-
-            postNote(data).then(response => {
-                if (response.data.status == '200') {
-                    Alert.alert(response.data.values.message);
-                    this.props.navigation.navigate("Home");
-                } else {
-                    Alert.alert("Input Note Failed")
-                }
-            }).catch(e => {
-                throw e;
-            })
+            console.log("ISI PROPS");
+            console.log(this.props);
+            this.props.dispatch(postNote(data));
+            /*
+             postNote(data).then(response => {
+                  if (response.data.status == '200') {
+                      Alert.alert(response.data.values.message);
+                      this.props.navigation.navigate("Home");
+                  } else {
+                      Alert.alert("Input Note Failed")
+                  }
+              }).catch(e => {
+                  throw e;
+              })*/
         } else {
             Alert.alert("Field note or title cannot empty");
         }
@@ -118,3 +120,10 @@ export default class AddNote extends React.Component {
     }
 }
 
+const mapsStageToProps = (state) => {
+    return {
+        notes: state.notes
+    }
+};
+
+export default connect(mapsStageToProps)(AddNote);

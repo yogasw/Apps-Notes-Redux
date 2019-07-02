@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import styles from './SideMenu.style';
-import {Image, ScrollView, Text, View, TouchableOpacity, Modal} from 'react-native';
+import {Image, Modal, ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import ItemDrawMenu from './ItemDrawMenu';
 import PopupCategory from '../Components/AddCategoryModal';
 import Icon from "react-native-vector-icons/MaterialIcons";
-import {getCategories} from "../Services/Apis";
+import {getCategories} from "../Services/Redux/action/notes";
 
 class SideMenu extends Component {
     constructor() {
@@ -25,7 +25,6 @@ class SideMenu extends Component {
     getCategoriesApi() {
         getCategories().then(response => {
             if (response.data.status == 200) {
-                console.log(response);
                 this.setState({listCategories: response.data.values})
             } else {
                 console.log("error")

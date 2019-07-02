@@ -1,15 +1,21 @@
-import xhr from './axios'
 //ulr, Method, data, headler
-import {URL_GET_CATEGORIES, URL_NOTES} from "../../Configs/Apis";
+import {URL_GET_CATEGORIES, URL_NOTES} from "../../../Configs/Apis";
+import xhr from './axios'
 
 export const getNotes = (search = '', sort = 'DESC') => {
     let url = `${URL_NOTES}?search=${search}&sort=${sort}`;
-    console.log("url adalah " + url);
-    return xhr(url, "GET");
+    return {
+        type: 'GET_NOTES',
+        payload: xhr(url, "GET")
+    };
 };
 
 export const postNote = (data) => {
-    return xhr(URL_NOTES, "POST", data);
+    return {
+        type: 'INSERT_NOTES',
+        payload: xhr(URL_NOTES, "POST", data),
+    };
+
 };
 export const getCategories = () => {
     return xhr(URL_GET_CATEGORIES, "GET");
