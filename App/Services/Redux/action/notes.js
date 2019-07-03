@@ -3,7 +3,7 @@ import {URL_GET_CATEGORIES, URL_NOTES} from "../../../Configs/Apis";
 import xhr from './axios'
 
 export const getNotes = (search = '', sort = 'DESC') => {
-    let url = `${URL_NOTES}?search=${search}&sort=${sort}`;
+    let url = `${URL_NOTES}?search=${search}&sort=${sort}&limit=10`;
     return {
         type: 'GET_NOTES',
         payload: xhr(url, "GET")
@@ -26,9 +26,15 @@ export const getCategories = () => {
 };
 
 export const patchNotes = (id, data) => {
-    return xhr(URL_NOTES + '/' + id, "PATCH", data);
+    return {
+        type: 'UPDATE_NOTES',
+        payload: xhr(URL_NOTES + '/' + id, "PATCH", data)
+    };
 };
 
 export const deleteNote = (id) => {
-    return xhr(URL_NOTES + '/' + id, "DELETE");
+    return {
+        type: 'DELETE_NOTES',
+        payload: xhr(URL_NOTES + '/' + id, "DELETE")
+    };
 };

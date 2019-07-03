@@ -5,6 +5,8 @@ import {Image, Modal, ScrollView, Text, TouchableOpacity, View} from 'react-nati
 import ItemDrawMenu from './ItemDrawMenu';
 import PopupCategory from '../Components/AddCategoryModal';
 import Icon from "react-native-vector-icons/MaterialIcons";
+import {getCategories} from '../Services/Redux/action/notes';
+import {connect} from 'react-redux';
 
 class SideMenu extends Component {
     constructor() {
@@ -22,6 +24,8 @@ class SideMenu extends Component {
     }
 
     getCategoriesApi() {
+        this.props.dispatch(getCategories());
+
         /* getCategories().then(response => {
              if (response.data.status == 200) {
                  this.setState({listCategories: response.data.values})
@@ -54,13 +58,15 @@ class SideMenu extends Component {
 
                         <ItemDrawMenu title="Home" icon="home" isPress={this._isPress} routeName="Home"
                                       activeMenu={this.state.onMenu}/>
-                        <ItemDrawMenu title="Personal" icon="account-circle" isPress={this._isPress}
-                                      routeName="EditNote" activeMenu={this.state.onMenu}/>
-                        <ItemDrawMenu title="Work" icon="work" isPress={this._isPress} routeName="Work"
-                                      activeMenu={this.state.onMenu}/>
-                        <ItemDrawMenu title="Wishlist" icon="list" isPress={this._isPress} routeName="Wishlist"
-                                      activeMenu={this.state.onMenu}/>
-
+                        {
+                            this.props.notes.categories.map((item, key, array) =>
+                                (
+                                    <ItemDrawMenu title={item.name} icon="list" isPress={this._isPress}
+                                                  routeName="Wishlist"
+                                                  activeMenu={this.state.onMenu}/>
+                                )
+                            )
+                        }
                         <TouchableOpacity onPress={() => this.changeModalVisibilty(true)}>
                             <View style={{
                                 flexDirection: 'row',
@@ -97,5 +103,10 @@ class SideMenu extends Component {
 SideMenu.propTypes = {
     navigation: PropTypes.object
 };
+const MapsStateToProps = (state) => {
+    return {
+        notes: state.notes
+    }
+}
 
-export default SideMenu;
+export default connect(MapsStateToProps)(SideMenu);

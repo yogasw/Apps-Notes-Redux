@@ -12,7 +12,10 @@ class Box extends PureComponent {
             this.textColor = this.props.textColor;
         }
     };
-    handlerClick = () => {
+    handlerClick
+
+
+        = () => {
         //handler for Long Click
         Alert.alert(' Button Long Pressed');
     };
@@ -22,9 +25,11 @@ class Box extends PureComponent {
 
         return (
             <TouchableOpacity
-                delayLongPress={1000}
+                delayLongPress={1700}
                 onLongPress={longPress}
-                onPress={onPress}>
+                onPress={onPress}
+                //onPress={longPress}
+            >
                 <View style={[styles.box, {
                     backgroundColor: this.bgColor || 'orange',
                 }]}>

@@ -2,9 +2,9 @@ import React from "react";
 import {Container, Content, Form, Picker, Text, Textarea,} from "native-base";
 import {getCategories, patchNotes} from "../Services/Redux/action/notes";
 import HeaderMenu from "../Components/HeaderMenu";
-import {Alert} from "react-native";
+import {connect} from 'react-redux';
 
-export default class EditNote extends React.Component {
+class EditNote extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -18,11 +18,13 @@ export default class EditNote extends React.Component {
     }
 
     componentDidMount() {
-        getCategories().then(response => {
+        this.props.dispatch(getCategories());
+        console.log(this.props);
+        /*getCategories().then(response => {
             this.setState({listCategories: response.data.values});
         }).catch(e => {
             throw e;
-        })
+        })*/
     }
 
     _onLayout = event => {
@@ -41,8 +43,8 @@ export default class EditNote extends React.Component {
                 'note': this.state.description,
                 'id_category': this.state.selectedCategory
             };
-
-            patchNotes(id, data).then(response => {
+            this.props.dispatch(patchNotes(id, data));
+            /*patchNotes(id, data).then(response => {
                 if (response.data.status == '200') {
                     Alert.alert("Update Note Success ");
                     this.props.navigation.navigate("Home");
@@ -52,7 +54,7 @@ export default class EditNote extends React.Component {
             }).catch(e => {
                 Alert.alert("Update Note Failed 2");
                 throw e;
-            })
+            })*/
         } else {
             this.props.navigation.navigate("Home");
         }
@@ -110,9 +112,9 @@ export default class EditNote extends React.Component {
                             onValueChange={(selectedCategory) => this.setState({selectedCategory})}
                             selectedValue={category}>
                             {
-                                Object.keys(this.state.listCategories).map((key) => (
-                                    <Picker.Item key={key} label={this.state.listCategories[key].name}
-                                                 value={this.state.listCategories[key].id}/>
+                                Object.keys(this.props.notes.categories).map((key) => (
+                                    <Picker.Item key={key} label={this.props.notes.categories[key].name}
+                                                 value={this.props.notes.categories[key].id}/>
                                 ))
                             }
 
@@ -123,3 +125,11 @@ export default class EditNote extends React.Component {
         );
     }
 }
+
+const MapsStateToProps = (state) => {
+    return {
+        notes: state.notes
+    }
+}
+
+export default connect(MapsStateToProps)(EditNote);

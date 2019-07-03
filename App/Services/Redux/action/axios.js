@@ -7,6 +7,8 @@ const xhr = async (url, method, data, headers,) => {
         data: data,
         url: url,
     };
+    console.log("AXIOS LOG")
+    console.log(options);
     try {
         return await axios(options);
     } catch (e) {

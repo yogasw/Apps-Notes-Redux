@@ -7,7 +7,7 @@ import Box from '../Components/Box';
 import HeaderMenu from '../Components/HeaderMenu'
 import color from "../Helper/Color";
 import styles from './Home.style';
-import {getNotes} from "../Services/Redux/action/notes";
+import {deleteNote, getNotes} from "../Services/Redux/action/notes";
 import {connect} from 'react-redux';
 
 class HomeScreen extends Component {
@@ -54,12 +54,13 @@ class HomeScreen extends Component {
             {
                 text: 'ok',
                 onPress: () => {
-                    deleteNote(id).then(respons => {
-                        Alert.alert('Note Deleted');
-                    }).catch(e => {
-                        Alert.alert('Delete data from api failed');
-                        console.log(e);
-                    })
+                    this.props.dispatch(deleteNote(id));
+                    // deleteNote(id).then(respons => {
+                    //     Alert.alert('Note Deleted');
+                    // }).catch(e => {
+                    //     Alert.alert('Delete data from api failed');
+                    //     console.log(e);
+                    // })
                 }
             }
         ]);
