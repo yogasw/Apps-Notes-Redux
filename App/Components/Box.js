@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import {Text} from "native-base";
-import {Alert, StyleSheet, TouchableOpacity, View} from "react-native";
+import {StyleSheet, TouchableOpacity, View} from "react-native";
 
 class Box extends PureComponent {
 
@@ -12,13 +12,7 @@ class Box extends PureComponent {
             this.textColor = this.props.textColor;
         }
     };
-    handlerClick
 
-
-        = () => {
-        //handler for Long Click
-        Alert.alert(' Button Long Pressed');
-    };
     render() {
         this.initStyle();
         const {id, time, title, category, note, longPress, onPress} = this.props;
@@ -28,7 +22,6 @@ class Box extends PureComponent {
                 delayLongPress={1700}
                 onLongPress={longPress}
                 onPress={onPress}
-                //onPress={longPress}
             >
                 <View style={[styles.box, {
                     backgroundColor: this.bgColor || 'orange',

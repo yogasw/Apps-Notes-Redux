@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
-import {Text, TextInput, TouchableOpacity, View, StyleSheet, Dimensions} from 'react-native';
-
+import {Dimensions, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {insertCategories} from "../Services/Redux/action/notes";
+import {connect} from 'react-redux';
 
 class AddCategoryModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
             width: Dimensions.get('window').width,
+            name: '',
+            image: ''
         };
         Dimensions.addEventListener('change', (e) => {
             this.setState(e.window);
@@ -15,6 +18,15 @@ class AddCategoryModal extends Component {
 
     closeModal() {
         this.props.changeModalVisibilty(false);
+    }
+
+    createCategory() {
+        let data = {
+            name: this.state.name,
+            image: this.state.image
+        };
+
+        this.props.dispatch(insertCategories(data))
     }
 
     render() {
@@ -37,6 +49,7 @@ class AddCategoryModal extends Component {
                         <TextInput
                             placeholder="Category Name"
                             underlineColorAndroid="#2ED1A2"
+                            onChangeText={(name) => this.setState({name})}
                             style={{
                                 width: this.state.width - 120
                             }}
@@ -44,6 +57,7 @@ class AddCategoryModal extends Component {
                         <TextInput
                             placeholder="Image Url"
                             underlineColorAndroid="#2ED1A2"
+                            onChangeText={(image) => this.setState({image})}
                             style={{
                                 width: this.state.width - 120
                             }}
@@ -55,7 +69,9 @@ class AddCategoryModal extends Component {
                             marginTop: 20,
                             width: this.state.width - 120
                         }}>
-                            <Text style={{
+                            <Text
+                                onPress={() => this.createCategory()}
+                                style={{
                                 fontWeight: 'bold',
                                 marginRight: 10,
                                 fontSize: 20,
@@ -73,7 +89,13 @@ class AddCategoryModal extends Component {
     }
 }
 
-export default AddCategoryModal;
+const MapsStateToProps = (state) => {
+    return {
+        notes: state.notes
+    }
+};
+
+export default connect(MapsStateToProps)(AddCategoryModal);
 
 const styles = StyleSheet.create({
     contentContainer: {
@@ -85,7 +107,7 @@ const styles = StyleSheet.create({
 
     },
     modal: {
-        height: 200,
+        height: 170,
         alignSelf: 'center',
         alignItems: 'center',
         textAlign: 'center',
@@ -104,3 +126,5 @@ const styles = StyleSheet.create({
     }
 
 });
+
+

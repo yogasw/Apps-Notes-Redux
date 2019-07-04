@@ -1,16 +1,19 @@
 import React, {PureComponent} from "react";
 import {Text, TouchableOpacity, View,} from "react-native";
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {NavigationActions} from "react-navigation";
 
 
 class ItemDrawMenu extends PureComponent {
+
     render() {
-        const {icon, title, marginTop, isPress, routeName, activeMenu} = this.props;
+        const {icon, title, marginTop, isPress, longPress, routeName, activeMenu} = this.props;
         let status = (routeName == activeMenu) ? 'active' : 'nonactive';
 
         return (
-            <TouchableOpacity onPress={() => isPress(routeName)}>
+            <TouchableOpacity
+                onLongPress={() => longPress()}
+                onPress={() => isPress(routeName)}
+            >
                 <View style={[styles.containerDrawCategory,
                     {
                         marginTop: marginTop || 5,

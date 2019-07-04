@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import styles from './SideMenu.style';
-import {Image, Modal, ScrollView, Text, TouchableOpacity, View} from 'react-native';
+import {Alert, Image, Modal, ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import ItemDrawMenu from './ItemDrawMenu';
 import PopupCategory from '../Components/AddCategoryModal';
 import Icon from "react-native-vector-icons/MaterialIcons";
-import {getCategories} from '../Services/Redux/action/notes';
+import {deleteCategories, getCategories} from '../Services/Redux/action/notes';
 import {connect} from 'react-redux';
 
 class SideMenu extends Component {
@@ -48,6 +48,19 @@ class SideMenu extends Component {
         this.setState({isModalVisible: bool});
     };
 
+    longPress(id) {
+        Alert.alert('Alert', 'Are you sure to delete category', [
+            {
+                text: 'cancel'
+            }, {
+                text: 'ok',
+                onPress: () => {
+                    this.props.dispatch(deleteCategories(id));
+                }
+            }
+        ]);
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -61,8 +74,13 @@ class SideMenu extends Component {
                         {
                             this.props.notes.categories.map((item, key, array) =>
                                 (
-                                    <ItemDrawMenu title={item.name} icon="list" isPress={this._isPress}
-                                                  routeName="Wishlist"
+                                    <ItemDrawMenu title={item.name}
+                                                  icon="list"
+                                                  isPress={this._isPress}
+                                                  longPress={() => {
+                                                      this.longPress(item.id)
+                                                  }}
+                                                  routeName={item.name}
                                                   activeMenu={this.state.onMenu}/>
                                 )
                             )

@@ -101,14 +101,53 @@ export default notes = (state = initialState, action) => {
             let newData = state.data.filter(function (element, i, array) {
                 return element.id != id
             });
-            console.log("Hasil");
-            console.log(newData);
             return {
                 ...state,
                 data: newData,
                 isLoading: false
             };
 
+        //INSERT_CATEGORIES
+        case 'INSERT_CATEGORIES_PENDING':
+            return {
+                ...state,
+                isLoading: true
+            };
+        case 'INSERT_CATEGORIES_REJECTED':
+            return {
+                ...state,
+                isLoading: false
+            };
+        case 'INSERT_CATEGORIES_FULFILLED':
+            console.log(action.payload.data.values.data[0]);
+            return {
+                ...state,
+                categories: [action.payload.data.values.data[0], ...state.categories],
+                isLoading: false
+            };
+
+
+        //DELETE CATEGORIES
+        case 'DELETE_CATEGORIES_PENDING':
+            return {
+                ...state,
+                isLoading: true
+            };
+        case 'DELETE_CATEGORIES_REJECTED':
+            return {
+                ...state,
+                isLoading: false
+            };
+        case 'DELETE_CATEGORIES_FULFILLED':
+            let idCategory = action.payload.data.values.id;
+            let newCategory = state.categories.filter(function (element, i, array) {
+                return element.id != idCategory
+            });
+            return {
+                ...state,
+                categories: newCategory,
+                isLoading: false
+            };
 
         default:
             return state;

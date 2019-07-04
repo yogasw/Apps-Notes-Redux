@@ -38,3 +38,16 @@ export const deleteNote = (id) => {
         payload: xhr(URL_NOTES + '/' + id, "DELETE")
     };
 };
+export const insertCategories = (data) => {
+    return {
+        type: 'INSERT_CATEGORIES',
+        payload: xhr(URL_GET_CATEGORIES + '/', "POST", data)
+    };
+};
+
+export const deleteCategories = (id) => {
+    return {
+        type: 'DELETE_CATEGORIES',
+        payload: xhr(URL_GET_CATEGORIES + '/' + id, 'DELETE')
+    }
+}
