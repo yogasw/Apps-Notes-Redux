@@ -1,7 +1,12 @@
 const initialState = {
     data: [],
     isLoading: false,
-    categories: []
+    categories: [],
+    nextPage: 1,
+    amountsPage: 1,
+    amountsNoteApi: 1,
+    amountsNote: 1,
+    searchBy: 'title',
 };
 
 export default notes = (state = initialState, action) => {
@@ -23,7 +28,11 @@ export default notes = (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: false,
-                data: action.payload.data.values
+                data: action.payload.data.values,
+                nextPage: action.payload.data.next_page,
+                amountsPage: action.payload.data.amounts_page,
+                amountsNote: action.payload.data.values.length,
+                amountsNoteApi: action.payload.data.amounts_note,
             };
 
         //GET CATEGORIES
@@ -107,6 +116,34 @@ export default notes = (state = initialState, action) => {
                 isLoading: false
             };
 
+        //GET NOTES MORE
+        case 'GET_MORE_NOTES_PENDING':
+            return {
+                ...state,
+                //isLoading: true
+            };
+        case 'GET_MORE_NOTES_REJECTED':
+            return {
+                ...state,
+                isLoading: false
+            };
+        case 'GET_MORE_NOTES_FULFILLED':
+            let newNotes;
+            if (state.amountsNote < state.amountsNoteApi) {
+                newNotes = [...state.data, ...action.payload.data.values];
+            } else {
+                newNotes = [...state.data];
+            }
+            return {
+                ...state,
+                isLoading: false,
+                nextPage: action.payload.data.next_page,
+                amountsPage: action.payload.data.amounts_page,
+                amountsNote: newNotes.length,
+                amountsNoteApi: action.payload.data.amounts_note,
+                data: newNotes
+            };
+
         //INSERT_CATEGORIES
         case 'INSERT_CATEGORIES_PENDING':
             return {
@@ -149,6 +186,18 @@ export default notes = (state = initialState, action) => {
                 isLoading: false
             };
 
+        //CONFIG
+        case 'ON_PAGE':
+            return {
+                ...state,
+                onPage: action.payload
+            };
+
+        case 'SEARCH_BY':
+            return {
+                ...state,
+                searchBy: action.payload
+            };
         default:
             return state;
     }

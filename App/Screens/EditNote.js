@@ -19,12 +19,6 @@ class EditNote extends React.Component {
 
     componentDidMount() {
         this.props.dispatch(getCategories());
-        console.log(this.props);
-        /*getCategories().then(response => {
-            this.setState({listCategories: response.data.values});
-        }).catch(e => {
-            throw e;
-        })*/
     }
 
     _onLayout = event => {
@@ -44,17 +38,6 @@ class EditNote extends React.Component {
                 'id_category': this.state.selectedCategory
             };
             this.props.dispatch(patchNotes(id, data));
-            /*patchNotes(id, data).then(response => {
-                if (response.data.status == '200') {
-                    Alert.alert("Update Note Success ");
-                    this.props.navigation.navigate("Home");
-                } else {
-                    Alert.alert("Update Note Failed 1")
-                }
-            }).catch(e => {
-                Alert.alert("Update Note Failed 2");
-                throw e;
-            })*/
         } else {
             this.props.navigation.navigate("Home");
         }
@@ -111,6 +94,7 @@ class EditNote extends React.Component {
                             style={{width: this.state.widthScrren}}
                             onValueChange={(selectedCategory) => this.setState({selectedCategory})}
                             selectedValue={category}>
+                            <Picker.Item label='select' value=''/>
                             {
                                 Object.keys(this.props.notes.categories).map((key) => (
                                     <Picker.Item key={key} label={this.props.notes.categories[key].name}

@@ -11,6 +11,7 @@ class ItemDrawMenu extends PureComponent {
 
         return (
             <TouchableOpacity
+                delayLongPress={1700}
                 onLongPress={() => longPress()}
                 onPress={() => isPress(routeName)}
             >

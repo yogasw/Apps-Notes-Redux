@@ -2,10 +2,10 @@
 import {URL_GET_CATEGORIES, URL_NOTES} from "../../../Configs/Apis";
 import xhr from './axios'
 
-export const getNotes = (search = '', sort = 'DESC') => {
-    let url = `${URL_NOTES}?search=${search}&sort=${sort}&limit=10`;
+export const getNotes = (search = '', sort = 'DESC', page = 1, searchBy = 'title') => {
+    let url = `${URL_NOTES}?search=${search}&sort=${sort}&page=${page}&limit=14&search_by=${searchBy}`;
     return {
-        type: 'GET_NOTES',
+        type: (page == 1) ? 'GET_NOTES' : 'GET_MORE_NOTES',
         payload: xhr(url, "GET")
     };
 };
@@ -50,4 +50,7 @@ export const deleteCategories = (id) => {
         type: 'DELETE_CATEGORIES',
         payload: xhr(URL_GET_CATEGORIES + '/' + id, 'DELETE')
     }
-}
+};
+
+
+

@@ -20,29 +20,16 @@ class HomeScreen extends Component {
             maxBox: null,
             data: [],
             search: '',
-            sort: 'desc'
+            sort: 'desc',
         };
-        this.getNotesApi = this.getNotesApi.bind(this);
     }
+
     componentDidMount() {
         this.getNotesApi();
     }
 
-    getNotesApi(search = '', sort = '') {
-        this.props.dispatch(getNotes(search, sort));
-        /* getNotes(search, sort).then(respons => {
-             if (respons.data.status == '200') {
-                 this.setState({
-                     data: respons.data.values,
-                     isFetching: false
-                 });
-             } else {
-                 this.setState({data: [], isFetching: false});
-             }
-         }).catch(e => {
-             this.setState({data: [], isFetching: false});
-             console.log(e)
-         })*/
+    getNotesApi(search = this.state.search, sort = this.state.sort, page = 1) {
+        this.props.dispatch(getNotes(search, sort, page, this.props.notes.searchBy));
     }
 
     deleteNoteApi(id) {
@@ -55,16 +42,15 @@ class HomeScreen extends Component {
                 text: 'ok',
                 onPress: () => {
                     this.props.dispatch(deleteNote(id));
-                    // deleteNote(id).then(respons => {
-                    //     Alert.alert('Note Deleted');
-                    // }).catch(e => {
-                    //     Alert.alert('Delete data from api failed');
-                    //     console.log(e);
-                    // })
                 }
             }
         ]);
     }
+
+    keyExtractor = item => {
+        return item.id.toString() + new Date().getTime().toString() + (Math.floor(Math.random() * Math.floor(new Date().getTime()))).toString();
+    };
+
     render() {
         const {navigate} = this.props.navigation;
         if (this.props.notes.isLoading) {
@@ -81,12 +67,13 @@ class HomeScreen extends Component {
                     title="Note App"
                     optionIcon='home'
                     sort={(search, sort) => {
-                        this.getNotesApi(this.state.search, sort)
+                        this.getNotesApi('', sort, 1)
                     }}
                 />
                 <Item rounded style={styles.search}>
                     <Input
-                        onSubmitEditing={() => this.getNotesApi(this.state.search)}
+                        onSubmitEditing={() => this.getNotesApi(this.state.search, null, 1)}
+                        defaultValue={this.state.search}
                         onChangeText={(search) => this.setState({search})}
                         placeholder='Search...'/>
                 </Item>
@@ -98,7 +85,8 @@ class HomeScreen extends Component {
                         data={this.props.notes.data}
                         horizontal={false}
                         numColumns={2}
-                        keyExtractor={(item, index) => item.id.toString()}
+                        keyExtractor={this.keyExtractor}
+
                         renderItem={({item, index}) =>
                             <Box
                                 time={item.time.split('T')[0]}
@@ -116,10 +104,17 @@ class HomeScreen extends Component {
                                 })}
                             />
                         }
+                        onEndReached={() => {
+                            if (this.props.notes.amountsNote < this.props.notes.amountsNoteApi) {
+                                this.getNotesApi(this.state.search, '', this.props.notes.nextPage);
+                            }
+                        }}
+                        onEndReachedThreshold={0.1}
                         refreshControl={
                             <RefreshControl
                                 refreshing={this.props.notes.isLoading}
-                                onRefresh={this.getNotesApi.bind(this)}/>
+                                onRefresh={() => this.getNotesApi('', '', 1)}
+                            />
                         }
                     />
                 </Content>
@@ -130,7 +125,9 @@ class HomeScreen extends Component {
                     containerStyle={{}}
                     style={{backgroundColor: '#ffffff'}}
                     position="bottomRight"
-                    onPress={() => this.props.navigation.navigate('AddNote')}>
+                    onPress={() =>
+                        this.props.navigation.navigate('AddNote')
+                    }>
                     <Icon name="plus" style={{color: 'black'}}/>
                 </Fab>
             </Container>

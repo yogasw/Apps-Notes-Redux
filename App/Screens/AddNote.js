@@ -20,11 +20,6 @@ class AddNote extends React.Component {
 
     componentDidMount() {
         this.props.dispatch(getCategories());
-        /* getCategories().then(response => {
-            this.setState({listCategories: response.data.values});
-        }).catch(e => {
-            throw e;
-        })*/
     }
 
     _onLayout = event => {
@@ -44,28 +39,14 @@ class AddNote extends React.Component {
                 'note': this.state.description,
                 'id_category': this.state.selectedCategory
             };
-            console.log("ISI PROPS");
-            console.log(this.props);
             this.props.dispatch(postNote(data));
-            /*
-             postNote(data).then(response => {
-                  if (response.data.status == '200') {
-                      Alert.alert(response.data.values.message);
-                      this.props.navigation.navigate("Home");
-                  } else {
-                      Alert.alert("Input Note Failed")
-                  }
-              }).catch(e => {
-                  throw e;
-              })*/
+
         } else {
             Alert.alert("Field note or title cannot empty");
         }
     };
 
     render() {
-        console.log("ISI PROPS");
-        console.log(this.props.notes.categories);
         return (
             <Container onLayout={this._onLayout}>
                 <HeaderMenu
@@ -109,6 +90,7 @@ class AddNote extends React.Component {
                             onValueChange={(selectedCategory) => this.setState({selectedCategory})}
                             selectedValue={this.state.selectedCategory}
                         >
+                            <Picker.Item label='select' value=''/>
                             {
                                 Object.keys(this.props.notes.categories).map((key) => (
                                     <Picker.Item key={key} label={this.props.notes.categories[key].name}

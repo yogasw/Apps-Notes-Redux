@@ -5,13 +5,15 @@ import {Alert, Image, Modal, ScrollView, Text, TouchableOpacity, View} from 'rea
 import ItemDrawMenu from './ItemDrawMenu';
 import PopupCategory from '../Components/AddCategoryModal';
 import Icon from "react-native-vector-icons/MaterialIcons";
-import {deleteCategories, getCategories} from '../Services/Redux/action/notes';
+import {deleteCategories, getCategories, getNotes} from '../Services/Redux/action/notes';
 import {connect} from 'react-redux';
+import {searchBy} from "../Services/Redux/action/config";
 
 class SideMenu extends Component {
     constructor() {
         super();
         this._isPress = this._isPress.bind(this);
+        this._isPressCategories = this._isPressCategories.bind(this);
         this.state = {
             onMenu: 'Home',
             isModalVisible: false,
@@ -19,28 +21,40 @@ class SideMenu extends Component {
         }
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
         this.getCategoriesApi();
     }
 
-    getCategoriesApi() {
+    getCategoriesApi = () => {
         this.props.dispatch(getCategories());
-
-        /* getCategories().then(response => {
-             if (response.data.status == 200) {
-                 this.setState({listCategories: response.data.values})
-             } else {
-                 console.log("error")
-             }
-         }).catch(e => {
-             throw e;
-         })*/
     }
 
-    _isPress(route) {
+    getNotesApi = (category) => {
+        this.props.dispatch(getNotes(category, '', 1, 'id_category'));
+    }
+
+    _isPress = (route) => {
         this.state.onMenu = route;
+        this.props.dispatch(searchBy('title'));
         this.props.navigation.closeDrawer();
         this.props.navigation.navigate(route);
+    }
+
+
+    _isPressHome = () => {
+        this.state.onMenu = 'Home';
+        this.props.dispatch(
+            getNotes('', '', 1, 'title'),
+            searchBy('title')
+        );
+        this.props.navigation.closeDrawer();
+    }
+
+    _isPressCategories = (route) => {
+        this.state.onMenu = route;
+        this.getNotesApi(route);
+        this.props.navigation.closeDrawer();
+        this.props.dispatch(searchBy('id_category'))
     }
 
     changeModalVisibilty = (bool) => {
@@ -48,13 +62,14 @@ class SideMenu extends Component {
         this.setState({isModalVisible: bool});
     };
 
-    longPress(id) {
+    longPress = (id) => {
         Alert.alert('Alert', 'Are you sure to delete category', [
             {
                 text: 'cancel'
             }, {
                 text: 'ok',
                 onPress: () => {
+                    this.props.navigation.closeDrawer();
                     this.props.dispatch(deleteCategories(id));
                 }
             }
@@ -69,18 +84,19 @@ class SideMenu extends Component {
                         <Image source={require('../Assets/icon.jpg')} style={styles.logo}/>
                         <Text style={styles.drawName}>Yoga Setiawan</Text>
 
-                        <ItemDrawMenu title="Home" icon="home" isPress={this._isPress} routeName="Home"
+                        <ItemDrawMenu title="Home" icon="home" isPress={this._isPressHome} routeName="Home"
                                       activeMenu={this.state.onMenu}/>
                         {
                             this.props.notes.categories.map((item, key, array) =>
                                 (
                                     <ItemDrawMenu title={item.name}
                                                   icon="list"
-                                                  isPress={this._isPress}
+                                                  isPress={this._isPressCategories}
                                                   longPress={() => {
                                                       this.longPress(item.id)
                                                   }}
-                                                  routeName={item.name}
+                                                  routeName={item.id}
+                                                  key={item.id}
                                                   activeMenu={this.state.onMenu}/>
                                 )
                             )
