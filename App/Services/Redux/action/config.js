@@ -18,3 +18,9 @@ export const searchBy = (by) => {
         payload: by
     }
 };
+export const sortBy = (by) => {
+    return {
+        type: 'SORT_BY',
+        payload: by
+    }
+};

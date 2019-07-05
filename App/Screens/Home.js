@@ -9,7 +9,7 @@ import color from "../Helper/Color";
 import styles from './Home.style';
 import {deleteNote, getNotes} from "../Services/Redux/action/notes";
 import {connect} from 'react-redux';
-import {search} from "../Services/Redux/action/config";
+import {search, sortBy} from "../Services/Redux/action/config";
 
 class HomeScreen extends Component {
     constructor(props) {
@@ -19,9 +19,6 @@ class HomeScreen extends Component {
             widthScrren: null,
             heightScreen: null,
             maxBox: null,
-            data: [],
-            search: '',
-            sort: 'desc',
         };
     }
 
@@ -29,7 +26,7 @@ class HomeScreen extends Component {
         this.getNotesApi();
     }
 
-    getNotesApi(search = this.props.notes.search, sort = this.state.sort, page = 1) {
+    getNotesApi(search = this.props.notes.search, sort = this.props.notes.sortBy, page = 1) {
         let by;
         if (search == '' || typeof search == "undefined") {
             by = this.props.notes.searchBy
@@ -74,12 +71,13 @@ class HomeScreen extends Component {
                     title="Note App"
                     optionIcon='home'
                     sort={(search, sort) => {
+                        this.props.dispatch(sortBy(sort))
                         this.getNotesApi('', sort, 1)
                     }}
                 />
                 <Item rounded style={styles.search}>
                     <Input
-                        onSubmitEditing={() => this.getNotesApi(this.props.notes.search, null, 1)}
+                        onSubmitEditing={() => this.getNotesApi(this.props.notes.search, '', 1)}
                         onChangeText={(text) => this.props.dispatch(search(text))}
                         placeholder='Search...'/>
                 </Item>
@@ -112,7 +110,7 @@ class HomeScreen extends Component {
                         }
                         onEndReached={() => {
                             if (this.props.notes.amountsNote < this.props.notes.amountsNoteApi) {
-                                this.getNotesApi(this.props.notes.search, '', this.props.notes.nextPage);
+                                this.getNotesApi(this.props.notes.search, this.props.notes.sortBy, this.props.notes.nextPage);
                             }
                         }}
                         onEndReachedThreshold={0.1}
