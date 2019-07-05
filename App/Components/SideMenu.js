@@ -7,7 +7,7 @@ import PopupCategory from '../Components/AddCategoryModal';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import {deleteCategories, getCategories, getNotes} from '../Services/Redux/action/notes';
 import {connect} from 'react-redux';
-import {search, searchBy} from "../Services/Redux/action/config";
+import {reset, search, searchBy, sortBy} from "../Services/Redux/action/config";
 
 class SideMenu extends Component {
     constructor() {
@@ -29,13 +29,12 @@ class SideMenu extends Component {
         this.props.dispatch(getCategories());
     }
 
-    getNotesApi = (category) => {
-        this.props.dispatch(
-            search(category),
-        );
-        this.props.dispatch(
-            getNotes(category, '', 1, 'id_category'),
-        );
+    getNotesApi(search, sort, page, by) {
+        if (search == '') search = this.props.notes.search;
+        if (sort == '') search = this.props.notes.sortBy;
+        if (page == '') search = 1;
+
+        this.props.dispatch(getNotes(search, sort, page, by));
     }
 
     _isPress = (route) => {
@@ -43,20 +42,22 @@ class SideMenu extends Component {
         this.props.dispatch(searchBy('title'));
         this.props.navigation.closeDrawer();
         this.props.navigation.navigate(route);
-    }
-
-
+    };
     _isPressHome = () => {
         this.state.onMenu = 'Home';
-        this.props.dispatch(
-            getNotes()
-        );
+        this.props.dispatch(reset());
+        this.getNotesApi();
         this.props.navigation.closeDrawer();
     };
-
     _isPressCategories = (route) => {
         this.state.onMenu = route;
-        this.getNotesApi(route);
+
+        this.props.dispatch(search(route));
+        this.props.dispatch(searchBy('id_category'));
+        this.props.dispatch(sortBy('desc'));
+
+        this.props.dispatch(getNotes(route, 'desc', 1, 'id_category'));
+
         this.props.navigation.closeDrawer();
     }
 

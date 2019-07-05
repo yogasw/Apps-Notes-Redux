@@ -210,6 +210,14 @@ export default notes = (state = initialState, action) => {
                 ...state,
                 search: action.payload
             };
+
+        case 'RESET':
+            return {
+                ...state,
+                searchBy: 'title',
+                sortBy: 'desc',
+                search: '',
+            };
         default:
             return state;
     }

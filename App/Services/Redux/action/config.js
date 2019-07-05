@@ -24,3 +24,10 @@ export const sortBy = (by) => {
         payload: by
     }
 };
+
+export const reset = () => {
+    return {
+        type: 'RESET',
+    }
+};
+
