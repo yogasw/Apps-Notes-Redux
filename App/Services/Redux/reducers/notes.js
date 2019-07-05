@@ -7,6 +7,7 @@ const initialState = {
     amountsNoteApi: 1,
     amountsNote: 1,
     searchBy: 'title',
+    search: '',
 };
 
 export default notes = (state = initialState, action) => {
@@ -197,6 +198,11 @@ export default notes = (state = initialState, action) => {
             return {
                 ...state,
                 searchBy: action.payload
+            };
+        case 'SEARCH':
+            return {
+                ...state,
+                search: action.payload
             };
         default:
             return state;

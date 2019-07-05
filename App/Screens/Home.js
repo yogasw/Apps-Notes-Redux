@@ -9,6 +9,7 @@ import color from "../Helper/Color";
 import styles from './Home.style';
 import {deleteNote, getNotes} from "../Services/Redux/action/notes";
 import {connect} from 'react-redux';
+import {search} from "../Services/Redux/action/config";
 
 class HomeScreen extends Component {
     constructor(props) {
@@ -28,8 +29,14 @@ class HomeScreen extends Component {
         this.getNotesApi();
     }
 
-    getNotesApi(search = this.state.search, sort = this.state.sort, page = 1) {
-        this.props.dispatch(getNotes(search, sort, page, this.props.notes.searchBy));
+    getNotesApi(search = this.props.notes.search, sort = this.state.sort, page = 1) {
+        let by;
+        if (search == '' || typeof search == "undefined") {
+            by = this.props.notes.searchBy
+        } else {
+            by = 'title'
+        }
+        this.props.dispatch(getNotes(search, sort, page, by));
     }
 
     deleteNoteApi(id) {
@@ -72,9 +79,8 @@ class HomeScreen extends Component {
                 />
                 <Item rounded style={styles.search}>
                     <Input
-                        onSubmitEditing={() => this.getNotesApi(this.state.search, null, 1)}
-                        defaultValue={this.state.search}
-                        onChangeText={(search) => this.setState({search})}
+                        onSubmitEditing={() => this.getNotesApi(this.props.notes.search, null, 1)}
+                        onChangeText={(text) => this.props.dispatch(search(text))}
                         placeholder='Search...'/>
                 </Item>
                 <Content
@@ -106,7 +112,7 @@ class HomeScreen extends Component {
                         }
                         onEndReached={() => {
                             if (this.props.notes.amountsNote < this.props.notes.amountsNoteApi) {
-                                this.getNotesApi(this.state.search, '', this.props.notes.nextPage);
+                                this.getNotesApi(this.props.notes.search, '', this.props.notes.nextPage);
                             }
                         }}
                         onEndReachedThreshold={0.1}

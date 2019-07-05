@@ -7,7 +7,7 @@ import PopupCategory from '../Components/AddCategoryModal';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import {deleteCategories, getCategories, getNotes} from '../Services/Redux/action/notes';
 import {connect} from 'react-redux';
-import {searchBy} from "../Services/Redux/action/config";
+import {search, searchBy} from "../Services/Redux/action/config";
 
 class SideMenu extends Component {
     constructor() {
@@ -30,7 +30,12 @@ class SideMenu extends Component {
     }
 
     getNotesApi = (category) => {
-        this.props.dispatch(getNotes(category, '', 1, 'id_category'));
+        this.props.dispatch(
+            search(category),
+        );
+        this.props.dispatch(
+            getNotes(category, '', 1, 'id_category'),
+        );
     }
 
     _isPress = (route) => {
@@ -44,17 +49,15 @@ class SideMenu extends Component {
     _isPressHome = () => {
         this.state.onMenu = 'Home';
         this.props.dispatch(
-            getNotes('', '', 1, 'title'),
-            searchBy('title')
+            getNotes()
         );
         this.props.navigation.closeDrawer();
-    }
+    };
 
     _isPressCategories = (route) => {
         this.state.onMenu = route;
         this.getNotesApi(route);
         this.props.navigation.closeDrawer();
-        this.props.dispatch(searchBy('id_category'))
     }
 
     changeModalVisibilty = (bool) => {

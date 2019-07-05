@@ -5,6 +5,12 @@ export const onPage = (page) => {
     }
 };
 
+export const search = (string) => {
+    return {
+        type: 'SEARCH',
+        payload: string
+    }
+};
 
 export const searchBy = (by) => {
     return {

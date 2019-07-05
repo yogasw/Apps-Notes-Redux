@@ -3,7 +3,7 @@ import {URL_GET_CATEGORIES, URL_NOTES} from "../../../Configs/Apis";
 import xhr from './axios'
 
 export const getNotes = (search = '', sort = 'DESC', page = 1, searchBy = 'title') => {
-    let url = `${URL_NOTES}?search=${search}&sort=${sort}&page=${page}&limit=14&search_by=${searchBy}`;
+    let url = `${URL_NOTES}?search=${search}&sort_by=${sort}&page=${page}&limit=8&search_by=${searchBy}`;
     return {
         type: (page == 1) ? 'GET_NOTES' : 'GET_MORE_NOTES',
         payload: xhr(url, "GET")
