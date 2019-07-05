@@ -26,7 +26,11 @@ class HomeScreen extends Component {
         this.getNotesApi();
     }
 
-    getNotesApi(search = this.props.notes.search, sort = this.props.notes.sortBy, page = 1) {
+    getNotesApi(search, sort, page) {
+        if (search == '') search = this.props.notes.search;
+        if (sort == '') search = this.props.notes.sortBy;
+        if (page == '') search = 1;
+
         let by;
         if (search == '' || typeof search == "undefined") {
             by = this.props.notes.searchBy
@@ -72,13 +76,14 @@ class HomeScreen extends Component {
                     optionIcon='home'
                     sort={(search, sort) => {
                         this.props.dispatch(sortBy(sort))
-                        this.getNotesApi('', sort, 1)
+                        this.getNotesApi(this.props.notes.search, sort, 1)
                     }}
                 />
                 <Item rounded style={styles.search}>
                     <Input
-                        onSubmitEditing={() => this.getNotesApi(this.props.notes.search, '', 1)}
+                        onSubmitEditing={() => this.getNotesApi(this.props.notes.search, this.props.notes.sortBy, 1)}
                         onChangeText={(text) => this.props.dispatch(search(text))}
+                        value={this.props.notes.search}
                         placeholder='Search...'/>
                 </Item>
                 <Content
