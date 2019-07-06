@@ -38,6 +38,7 @@ class EditNote extends React.Component {
                 'id_category': this.state.selectedCategory
             };
             this.props.dispatch(patchNotes(id, data));
+            this.props.navigation.navigate("Home");
         } else {
             this.props.navigation.navigate("Home");
         }
@@ -88,12 +89,14 @@ class EditNote extends React.Component {
                             }}>
                             CATEGORY
                         </Text>
-
                         <Picker
                             mode='dropdown'
-                            style={{width: this.state.widthScrren}}
+                            style={{
+                                width: this.state.widthScrren,
+                            }}
                             onValueChange={(selectedCategory) => this.setState({selectedCategory})}
-                            selectedValue={category}>
+                            selectedValue={this.state.selectedCategory}
+                        >
                             <Picker.Item label='select' value=''/>
                             {
                                 Object.keys(this.props.notes.categories).map((key) => (

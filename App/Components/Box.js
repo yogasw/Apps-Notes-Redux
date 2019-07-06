@@ -54,10 +54,11 @@ class Box extends PureComponent {
 
 const styles = StyleSheet.create({
     date: {
+        display: 'flex',
         fontSize: 12,
         color: 'white',
         alignSelf: 'flex-end',
-        marginRight: -5,
+        marginRight: -30,
         marginTop: 10,
         width: 70
     },
@@ -87,6 +88,15 @@ const styles = StyleSheet.create({
         width: 150,
         borderRadius: 20,
         margin: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+
+        elevation: 5,
 
     },
 });

@@ -1,6 +1,6 @@
 const Color = (id) => {
 
-    let color = ['e57373', 'F06292', 'BA68C8', '9575CD', '7986CB', '64B5F6'];
+    let color = ['2FC2DF', 'FAD06C', 'C0EB6A', 'FF92A9'];
 
     let i = '';
     switch (id) {
@@ -18,10 +18,6 @@ const Color = (id) => {
         }
         case 4: {
             i = color[3];
-            break;
-        }
-        case 5: {
-            i = color[4];
             break;
         }
         default: {

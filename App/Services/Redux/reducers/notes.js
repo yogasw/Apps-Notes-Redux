@@ -122,7 +122,7 @@ export default notes = (state = initialState, action) => {
         case 'GET_MORE_NOTES_PENDING':
             return {
                 ...state,
-                //isLoading: true
+                isLoading: true
             };
         case 'GET_MORE_NOTES_REJECTED':
             return {

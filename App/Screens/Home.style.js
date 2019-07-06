@@ -3,12 +3,20 @@ export default {
         paddingLeft: 20,
         paddingRight: 20,
         marginTop: 90,
-        marginBottom: 10,
         marginRight: 20,
         marginLeft: 20,
         position: 'absolute',
         backgroundColor: '#fff',
-        zIndex: 1
+        zIndex: 1,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+
+        elevation: 5,
     },
     content: {
         /*flexDirection: 'row',*/

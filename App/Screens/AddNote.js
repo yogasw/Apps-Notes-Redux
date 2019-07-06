@@ -40,6 +40,7 @@ class AddNote extends React.Component {
                 'id_category': this.state.selectedCategory
             };
             this.props.dispatch(postNote(data));
+            this.props.navigation.navigate("Home");
 
         } else {
             Alert.alert("Field note or title cannot empty");

@@ -2,10 +2,12 @@
 import {URL_GET_CATEGORIES, URL_NOTES} from "../../../Configs/Apis";
 import xhr from './axios'
 
+
 export const getNotes = (search, sort, page, searchBy) => {
-    let url = `${URL_NOTES}?search=${search}&sort_by=${sort}&page=${page}&limit=7&search_by=${searchBy}`;
+
+    let url = `${URL_NOTES}?search=${(search == undefined) ? '' : search}&sort_by=${(sort == undefined) ? 'desc' : sort}&page=${(page == undefined) ? 1 : page}&limit=10&search_by=${(searchBy == undefined) ? 'title' : searchBy}`;
     return {
-        type: (page == 1) ? 'GET_NOTES' : 'GET_MORE_NOTES',
+        type: (page == 1 || page == undefined) ? 'GET_NOTES' : 'GET_MORE_NOTES',
         payload: xhr(url, "GET")
     };
 };

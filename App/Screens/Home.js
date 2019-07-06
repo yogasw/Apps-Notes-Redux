@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {Container, Content, Fab, Input, Item,} from "native-base";
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {ActivityIndicator, Alert, FlatList, RefreshControl, View} from "react-native";
+import {Alert, FlatList, RefreshControl} from "react-native";
 import Box from '../Components/Box';
 import HeaderMenu from '../Components/HeaderMenu'
 import color from "../Helper/Color";
@@ -10,6 +10,8 @@ import styles from './Home.style';
 import {deleteNote, getNotes} from "../Services/Redux/action/notes";
 import {connect} from 'react-redux';
 import {search, sortBy} from "../Services/Redux/action/config";
+import formatTime from '../Helper/FormatTime';
+import lodash from 'lodash';
 
 class HomeScreen extends Component {
     constructor(props) {
@@ -20,6 +22,7 @@ class HomeScreen extends Component {
             heightScreen: null,
             maxBox: null,
         };
+        this.limitSearch = lodash.debounce(this.getNotesApi, 1500);
     }
 
     componentDidMount() {
@@ -27,16 +30,10 @@ class HomeScreen extends Component {
     }
 
     getNotesApi(search, sort, page, by) {
-        if (search == '') search = this.props.notes.search;
-        if (sort == '') sort = this.props.notes.sortBy;
-        if (page == '') page = 1;
-        if (by == '') by = this.props.notes.searchBy;
-
         this.props.dispatch(getNotes(search, sort, page, by));
     }
 
     deleteNoteApi(id) {
-        console.log(id);
         Alert.alert("Alert", 'Are you sure to delete note : ' + id, [
             {
                 text: 'cancel'
@@ -56,13 +53,6 @@ class HomeScreen extends Component {
 
     render() {
         const {navigate} = this.props.navigation;
-        if (this.props.notes.isLoading) {
-            return (
-                <View style={{flex: 1, paddingTop: 90}}>
-                    <ActivityIndicator/>
-                </View>
-            )
-        }
         return (
             <Container onLayout={this._onLayout}>
                 <HeaderMenu
@@ -77,8 +67,11 @@ class HomeScreen extends Component {
                 <Item rounded style={styles.search}>
                     <Input
                         onSubmitEditing={() => this.getNotesApi(this.props.notes.search, this.props.notes.sortBy, 1)}
-                        onChangeText={(text) => this.props.dispatch(search(text))}
-                        //value={this.props.notes.search}
+                        onChangeText={(text) => {
+                            this.props.dispatch(search(text));
+                            this.limitSearch(this.props.notes.search, this.props.notes.sortBy, 1);
+                        }}
+                        value={(this.props.notes.searchBy != 'id_category') ? this.props.notes.search : ''}
                         placeholder='Search...'/>
                 </Item>
                 <Content
@@ -93,7 +86,7 @@ class HomeScreen extends Component {
 
                         renderItem={({item, index}) =>
                             <Box
-                                time={item.time.split('T')[0]}
+                                time={formatTime(item.time)}
                                 title={item.title}
                                 category={item.name_category}
                                 note={item.note}
@@ -109,6 +102,7 @@ class HomeScreen extends Component {
                             />
                         }
                         onEndReached={() => {
+
                             if (this.props.notes.amountsNote < this.props.notes.amountsNoteApi) {
                                 this.getNotesApi(this.props.notes.search, this.props.notes.sortBy, this.props.notes.nextPage, this.props.notes.searchBy)
                             }
@@ -116,6 +110,7 @@ class HomeScreen extends Component {
                         onEndReachedThreshold={0.1}
                         refreshControl={
                             <RefreshControl
+                                style={{zIndex: 1}}
                                 refreshing={this.props.notes.isLoading}
                                 onRefresh={() => this.getNotesApi('', '', 1)}
                             />

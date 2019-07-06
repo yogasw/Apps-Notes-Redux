@@ -87,14 +87,13 @@ class SideMenu extends Component {
                     <View style={styles.navItemStyle}>
                         <Image source={require('../Assets/icon.jpg')} style={styles.logo}/>
                         <Text style={styles.drawName}>Yoga Setiawan</Text>
-
                         <ItemDrawMenu title="Home" icon="home" isPress={this._isPressHome} routeName="Home"
                                       activeMenu={this.state.onMenu}/>
                         {
                             this.props.notes.categories.map((item, key, array) =>
                                 (
                                     <ItemDrawMenu title={item.name}
-                                                  icon="list"
+                                                  icon={item.image}
                                                   isPress={this._isPressCategories}
                                                   longPress={() => {
                                                       this.longPress(item.id)
