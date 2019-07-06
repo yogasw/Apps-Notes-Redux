@@ -5,6 +5,7 @@ import store from './Services/Redux/store'
 
 export default class noteapp extends Component {
     render() {
+        console.disableYellowBox = true;
         return (
             <Provider store={store}>
                 <AppNavigator/>

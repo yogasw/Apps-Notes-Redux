@@ -25,8 +25,8 @@ class AddCategoryModal extends Component {
             name: this.state.name,
             image: this.state.image
         };
-
         this.props.dispatch(insertCategories(data))
+        this.closeModal()
     }
 
     render() {
