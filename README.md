@@ -25,7 +25,7 @@ React Native invokes Objective-C APIs to render to iOS components, or Java APIs 
 ## Requirements
 1. npm (node package manager)
 2. react-native-cli (from npm)
-3. notes backend (`https://github.com/alavanta/restful-note-app-api-.git`)
+3. notes backend (`https://github.com/arioki1/Sample-Server-App-Note`)
 
 ## How to run the app ?
 1. Clone or download first this repository with `git clone https://github.com/arioki1/Apps-Notes-Redux.git`
